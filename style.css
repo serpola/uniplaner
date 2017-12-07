@@ -1,10 +1,18 @@
- form p{
+#t1{
     font-size:100px;
-     
+    font-family: Arial, sans-serif;
+    background-color: orange;
+    color: white;
+    position: fixed;
+    
 }
 
-/*form input{ margin-left: 1000px}*/
+
+a{
+}
+
+/*form input{ margin-left: 100px}*/
 
 #pw{
-   text-align:"right";
+   text-align:right;
 }
