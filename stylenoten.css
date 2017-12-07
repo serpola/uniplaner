@@ -1,0 +1,11 @@
+button{
+	text-align: center;
+	background-color: orange;
+}
+table {
+	margin: auto;
+}
+table td{ /* passt noch nicht*/
+	border: 1px solid #ddd;
+
+}
