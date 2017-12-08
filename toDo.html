@@ -2,25 +2,47 @@
     
     <head>
         <!-- UNIPLANER-->
-        <link href="styleToDo.css" type="text/css">
+        <link rel="stylesheet" href="styleToDo.css" type="text/css">
     </head>
-
     <body>
-        <div>
-        <p>TO-DO</p>
+        <div class="to-do">            
+            <table class="liste">
+               <caption>To-Do Liste</caption>
             
-        <ul style="list-style-type:none">
-            <li>
-                <input id="checkBox" type="checkbox">
-            </li>
-            <li>
-            
-            </li>
-        </ul>
-            
-        <input type="submit">
-                        
+                <tr>
+                    <td>
+                        <input type="checkbox">
+                        <input type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox">
+                        <input type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox">
+                        <input type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox">
+                        <input type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox">
+                        <input type="text">
+                    </td>
+                </tr>
+            </table>
         </div>
+        
+        <button type="submit" id="add">Einfügen</button>
     </body>
 
 </html>
