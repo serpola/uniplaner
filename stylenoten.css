@@ -1,11 +1,15 @@
 button{
-	text-align: center;
-	background-color: orange;
+	position: relative; /* or absolute ? */
+	background-color: #00e6b8;
+	left: 82px;
+	font-size: 16px;
+
 }
 table {
 	margin: auto;
 }
-table td{ /* passt noch nicht*/
-	border: 1px solid #ddd;
+table td{ /* wieso sind diese rahmen so komisch beschissen ? >.< */
+	/*border: 1px solid #ddd;*/
+	border-style: solid; /*sieht zwar nicht perfekt aus aber ich lass es mal so.*/
 
 }
