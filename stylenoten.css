@@ -17,3 +17,30 @@ table td{ /* wieso sind diese rahmen so komisch beschissen ? >.< */
 	border-style: solid; /*sieht zwar nicht perfekt aus aber ich lass es mal so.*/
 
 }
+
+header
+{
+ position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: orange;
+  text-align: center;
+  font-family: sans-serif;
+  color: white
+}
+
+body {
+  margin-left: 30px;
+  margin-right: 30px;
+  background: white;
+  padding-top: 90px;
+}
+
+#lgout{
+   
+    color: white;
+    margin-left: auto;
+    float: right;
+    
+}

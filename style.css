@@ -7,12 +7,57 @@
     
 }
 
-
-a{
+header
+{
+ position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: orange;
+  text-align: center;
+  font-family: sans-serif;
+  color: white
 }
 
-/*form input{ margin-left: 100px}*/
+header p{
+    font-size: 30px;
+}
 
-#pw{
-   text-align:right;
+articel{
+    margin-top:auto;
+    font-family: sans-serif;
+}
+
+
+body {
+  margin-left: 30px;
+  margin-right: 30px;
+  background: white;
+  padding-top: 90px;
+}
+
+#indx{
+  margin-top: auto;
+  font-family: sans;
+}
+
+article h1 {
+  font-size: 32px;
+}
+
+article p{
+    
+}
+
+#lgn{
+   
+    color: white;
+    margin-left: auto;
+    float: right;
+    
+}
+
+img{
+    margin:0 auto;
+    display: block;
 }
