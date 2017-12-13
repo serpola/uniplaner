@@ -1,3 +1,17 @@
+header
+{
+ position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: orange;
+  text-align: center;
+  font-family: sans-serif;
+  color: white
+}
+header p{
+    font-size: 30px;
+}
 button{
 	position: relative; /* or absolute ? */
 	background-color: #00e6b8;
@@ -9,11 +23,14 @@ button{
 	margin-top: 20px;
 	text-align: center;
 }
+#tables{
+	margin-top: 30px;
+}
 table {
 	margin: auto;
+
 }
 table td{ /* wieso sind diese rahmen so komisch beschissen ? >.< */
-	/*border: 1px solid #ddd;*/
 	border-style: solid; /*sieht zwar nicht perfekt aus aber ich lass es mal so.*/
 
 }
