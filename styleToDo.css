@@ -25,7 +25,6 @@ caption{
     height: auto;
     border: 1px solid black;
     border-spacing: 7px;
-    margin-top: 30px;
 }
 /*To-DO Liste Ende*/
 
@@ -35,8 +34,8 @@ caption{
     list-style-type: none;
     margin: 0;
     padding: 0;
-    overflow: hidden;
     background-color: bisque;
+    overflow: inherit;
 }
 
 li{
@@ -48,14 +47,10 @@ li a{
     padding: 8px;
     text-decoration: none;
     color: black;
-    
+    background-color: bisque;
+    margin-bottom: 30px; 
 }
 /*Navigationbar Ende*/
-
-
-#add{
-    margin-top: 10px;
-}
 
 /*Serdar*/
 #lgout{
