@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrieren</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="./public/javascript/reg_js.js"></script>
+</head>
+<body>
+<header><div><p>
+    Uni-Planer</p>
+   </div></header>
+
+<h1> Tragen Sie hier Ihre Kontaktdaten ein</h1>
+
+<form id = "regist" action = "http://127.0.0.1:8080/api/users" method="post">
+<label for="inputLName" class="sr-only">Login Name</label>
+<input type="text" id="inputLName" placeholder="Login Name"><br>
+
+<label for="inputVName" class="sr-only">Vorname Name</label>
+<input type="text" id="inputVName" placeholder="Vorname"><br>
+
+<label for="inputNName" class="sr-only">Nachname</label>
+<input type="text" id="inputNName"  placeholder="Nachname"><br>
+
+<label for="inputAnschrift" class="sr-only">Anschrift</label>
+<input type="text" id="inputAnschrift"  placeholder="Anschrift"><br>
+
+<label for="inputPasswort" class="sr-only">Password</label>
+<input type="password" id="inputPasswort"  placeholder="Passwort"><br>
+    </div>
+    <button class="btn btn-lg btn-warning btn-block" type="submit" value="send Message" ></button>
+</form>
+</div> <!-- /container -->
+</form>
+
+</body>
+</html>

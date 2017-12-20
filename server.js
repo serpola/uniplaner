@@ -2,27 +2,45 @@
 // get the packages we need ========================================
 // =================================================================
 var express 	= require('express');
-var app         = express();
 var bodyParser  = require('body-parser');
+var app         = express();
 var morgan      = require('morgan');
 var mongoose    = require('mongoose');
-
-var jwt    = require('jsonwebtoken'); // used to create, sign, and verify tokens
-var config = require('./config'); // get our config file
-var User   = require('./app/models/user'); // get our mongoose model
-
+var Form        = require('mongoose-forms').Form;
+var Bridge = require('mongoose-forms').Bridge;
+var jwt    = require('jsonwebtoken'); // zum erstellen und verifizieren von tockens
+var config = require('./config'); // zum getten der config datei
+var User   = require('./app/models/user'); // getten der mongose datei
+var form        = Form(User);
+var mongo = require('mongodb');
 // =================================================================
 // configuration ===================================================
 // =================================================================
-var port = process.env.PORT || 8080; // used to create, sign, and verify tokens
-mongoose.connect(config.database); // connect to database
-app.set('superSecret', config.secret); // secret variable
+var port = process.env.PORT || 8080;
+mongoose.connect(config.database); // db verbindung
+app.set('superSecret', config.secret); // geheime variable
 
-// use body parser so we can get info from POST and/or URL parameters
+// zum Parsen
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(express.static('static'));
+app.use(express.json());
 
-// use morgan to log requests to the console
+
+mongo.MongoClient.connect(config.database)
+    .then(function (conn) {
+        return conn.collection('riko493');
+    })
+    .then((result) => {
+        db = result
+        console.log(result);
+    })
+    .catch((err) => {
+        console.log(err);
+    });
+
+
+// morgen zum logen in der konsole
 app.use(morgan('dev'));
 
 // =================================================================
@@ -30,37 +48,60 @@ app.use(morgan('dev'));
 // =================================================================
 app.get('/setup', function(req, res) {
 
-    // create a sample user
+    // beispiel benutzer erstellen
     var nick = new User({
-        name: 'admin',
+        lname: 'admin',
+        vname: 'asdsasd',
+        nname: 'asdsada',
         password: 'password',
+        anschrift: 'asdasdasd',
         admin: true
     });
     nick.save(function(err) {
         if (err) throw err;
 
-        console.log('User saved successfully');
+        console.log('Benutzer erfolgreich gespeichert');
         res.json({ success: true });
     });
-});
-
-
-app.post('/user', function (req, res) {
-    var user = document.getElementById('inputEmail');
-    var password = document.getElementById('input');
-    
-
-});
-
-// basic route (http://localhost:8080)
-app.get('/', function(req, res) {
-    res.send('Hello! The API is at http://localhost:' + port + '/api');
 });
 
 // ---------------------------------------------------------
 // get an instance of the router for api routes
 // ---------------------------------------------------------
 var apiRoutes = express.Router();
+
+
+
+apiRoutes.get('/api/users', function (req, res)  {
+  User.insertOne({
+      lname:req.body.lname
+  })
+
+});
+       /* var u = new User({
+            lname: req.body.,
+            vname: v_name,
+            nname: n_name,
+            password: password,
+            anschrift: anschrift,
+            admin: false,
+
+        })
+        user.save(function (err) {
+            if (err) throw err;
+
+            console.log('Benutzer erfolgreich gespeichert');
+            res.json({ success: true });
+
+        })*/
+
+
+// standart route (http://localhost:8080)
+app.get('/', function(req, res) {
+    res.send('Hello! The API is at http://localhost:' + port + '/api');
+});
+
+
 
 // ---------------------------------------------------------
 // authentication (no middleware necessary since this isnt authenticated)
@@ -108,7 +149,7 @@ apiRoutes.post('/authenticate', function(req, res) {
 // ---------------------------------------------------------
 // route middleware to authenticate and check token
 // ---------------------------------------------------------
-apiRoutes.use(function(req, res, next) {
+/*apiRoutes.use(function(req, res, next) {
 
     // check header or url parameters or post parameters for token
     var token = req.body.token || req.param('token') || req.headers['x-access-token'];
@@ -138,13 +179,13 @@ apiRoutes.use(function(req, res, next) {
 
     }
 
-});
+});*/
 
 // ---------------------------------------------------------
 // authenticated routes
 // ---------------------------------------------------------
 apiRoutes.get('/', function(req, res) {
-    res.json({ message: 'Welcome to the coolest API on earth!' });
+    res.json({ message: 'Wilkommmen bei Unserer Api' });
 });
 
 apiRoutes.get('/users', function(req, res) {
@@ -163,4 +204,4 @@ app.use('/api', apiRoutes);
 // start the server ================================================
 // =================================================================
 app.listen(port);
-console.log('Magic happens at http://localhost:' + port);
+console.log('Start des Servers http://localhost:' + port);
