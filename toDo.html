@@ -4,11 +4,11 @@
     <head>
         <!-- UNIPLANER-->
         <link rel="stylesheet" href="styleToDo.css" type="text/css">
-        <script language="javascript" type="text/javascript" src="toDo_javas.js"></script>
+        <script> language="javascript" src="toDo_javas.js" type="text/javascript" </script>
+
     </head>
-    <body>
-        
     
+    <body>
         <header>
             <div><p>Uni-Planer</p>
             <a id="lgout" href="index.html">Abmelden</a></div>
@@ -16,20 +16,22 @@
         
         <p id="todo">TO-DO Liste</p>
         
-        <p id="description">Du hast vergessen die Hausarbeit in Mathe zu machen oder dein Referats? Kein Problem! Mit diesem Tool kannst du deine Erledigungen eintragen und sie abhacken, wenn sie erledigt sind. </p>
+        <p id="description">Du hast vergessen die Hausarbeit in Mathe zu machen oder dein Referat? Kein Problem! Mit diesem Tool kannst du deine Erledigungen eintragen und sie abhacken, wenn sie erledigt sind. </p>
         
         <div class="buttons">
             <ul class="nav">
-                <li><a href="#add" id="add">Neuer Eintrag</a></li>
-                <li><a href="#delete" id="delete">Eintrag löschen</a></li>
-                <!--<li><button onclick="add()" id="add">Neuer Eintrag</button></li>-->
-                <!--<li><button onclick="delete()" id="delete">Eintrag löschen</button></li>-->
+                
+                <!--BUTTON ODER A???-->
+                <button onclick="myFunction()">Try it</button>
             </ul>
         </div>
         
-        <div class="to-do">            
-            <table class="liste">
+        <div class="to-do">    
+            
+            <table id="liste">
+                
                <caption>To-Do Liste</caption>
+                    
                 <tr>
                     <td>
                         <input type="checkbox">
@@ -52,7 +54,8 @@
                 </tr>
                 
             </table>
-        </div>
+            
+        </div>    
         
     </body>
 
