@@ -4,12 +4,11 @@
     <head>
         <!-- UNIPLANER-->
         <link rel="stylesheet" href="styleToDo.css" type="text/css">
-        <script language="javascript" type="text/javascript" src="toDo_javas.js">
-        </script>
+        <script> language="javascript" src="toDo_javas.js" type="text/javascript" </script>
+
     </head>
-    <body>
-        
     
+    <body>
         <header>
             <div><p>Uni-Planer</p>
             <a id="lgout" href="index.html">Abmelden</a></div>
@@ -23,16 +22,16 @@
             <ul class="nav">
                 
                 <!--BUTTON ODER A???-->
-                <li><button id="add">Neuer Eintrag</button></li>
-                <li><a href="#delete" id="delete">Eintrag löschen</a></li>
-                <!--<li><button onclick="add()" id="add">Neuer Eintrag</button></li>-->
-                <!--<li><button onclick="delete()" id="delete">Eintrag löschen</button></li>-->
+                <button onclick="myFunction()">Try it</button>
             </ul>
         </div>
         
-        <div class="to-do">            
-            <table class="liste">
+        <div class="to-do">    
+            
+            <table id="liste">
+                
                <caption>To-Do Liste</caption>
+                    
                 <tr>
                     <td>
                         <input type="checkbox">
@@ -55,7 +54,8 @@
                 </tr>
                 
             </table>
-        </div>
+            
+        </div>    
         
     </body>
 

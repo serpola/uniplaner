@@ -20,7 +20,7 @@ caption{
     border: 1px solid black;
 }
 
-.liste{
+#liste{
     width: 80%;
     height: auto;
     border: 1px solid black;
@@ -28,29 +28,6 @@ caption{
 }
 /*To-DO Liste Ende*/
 
-
-/*Navigationbar Anfang*/
-.nav{
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    background-color: bisque;
-    overflow: inherit;
-}
-
-li{
-    float: left;
-}
-
-li a{
-    display: block;
-    padding: 8px;
-    text-decoration: none;
-    color: black;
-    background-color: bisque;
-    margin-bottom: 30px; 
-}
-/*Navigationbar Ende*/
 
 /*Serdar*/
 #lgout{

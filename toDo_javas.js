@@ -1,16 +1,13 @@
-/*document.getElementById('#add').onclick = function() {add();};
+var document = typeof document === 'undefined' ? '' : document;
 
-function add() {  
-}*/
-
-$(document).ready(function(){
-  
-    $("#add").click(function (){
-        
-        $(".liste").append(
-        "<tr>" + /*Inputfeld und checkbox*/
-        "</tr>");
-        
-    })
+(function(){
+    
+function myFunction() {
+    var table = document.getElementById("liste");
+    var row = table.insertRow(0);
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    cell1.innerHTML = "NEW CELL1";
+    cell2.innerHTML = "NEW CELL2";
+}    
 })
-
