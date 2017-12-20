@@ -4,7 +4,7 @@
 	<link rel="stylesheet" type="text/css" href="stylenoten.css">
 </head>
 <body>
-    
+    <script src="noten_java.js"></script>
     
      <header><div><p>  
        Uni-Planer</p>
@@ -19,30 +19,30 @@
 			<th>Datum</th>
 		</tr>
 		<tr>
-			<td><input type="text" name=""></td> <!--Inputfelder -->
-			<td><input type="text" name=""></td>
-			<td><input type="text" name=""></td>
-			<td><input type="text" name=""></td>
+			<td><input type="text" name="modul"></td> <!--Inputfelder -->
+			<td><input type="text" name="note"></td>
+			<td><input type="text" name="ects"></td>
+			<td><input type="text" name="datum"></td>
 		</tr>
 		<tr>
-			<td><input type="text" name=""></td> <!--Inputfelder -->
-			<td><input type="text" name=""></td>
-			<td><input type="text" name=""></td>
-			<td><input type="text" name=""></td>
+			<td><input type="text" name="modul"></td> <!--Inputfelder -->
+			<td><input type="text" name="note"></td>
+			<td><input type="text" name="ects"></td>
+			<td><input type="text" name="datum"></td>
 		</tr>
 		<tr>
-			<td><input type="text" name=""></td> <!--Inputfelder -->
-			<td><input type="text" name=""></td>
-			<td><input type="text" name=""></td>
-			<td><input type="text" name=""></td>
+			<td><input type="text" name="modul"></td> <!--Inputfelder -->
+			<td><input type="text" name="note"></td>
+			<td><input type="text" name="ects"></td>
+			<td><input type="text" name="datum"></td>
 		</tr>
 		<!-- Mit JS durch Button neue Tabellenzeile generieren -->
 		</table>
 	</div>
 	<div id="buttons">
-		<button id="newEntry">Neuen Eintrag generieren</button><br><!--neue Tabellenzeile generieren -->
-		<button id="getECTS">ECTS berechnen</button><!-- Summe der ECTS berechnen-->
-		<button id="getNotes">Notendurchschnitt berechnen</button><!--Durchschnitt der bestandenen Noten berechnen -->
+		<button id="newEntry" onclick="newTableRow()">Neuen Eintrag generieren</button><br><!--neue Tabellenzeile generieren -->
+		<button id="getECTS" onclick="CalculatorECTS()">ECTS berechnen</button><!-- Summe der ECTS berechnen-->
+		<button id="getNotes" onclick="AverageGrades()">Notendurchschnitt berechnen</button><!--Durchschnitt der bestandenen Noten berechnen -->
 	</div>
 </body>
 </html>
