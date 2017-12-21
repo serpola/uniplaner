@@ -2,17 +2,16 @@
 // get the packages we need ========================================
 // =================================================================
 var express 	= require('express');
-var bodyParser  = require('body-parser');
 var app         = express();
+var bodyParser  = require('body-parser');
 var morgan      = require('morgan');
 var mongoose    = require('mongoose');
-var Form        = require('mongoose-forms').Form;
-var Bridge = require('mongoose-forms').Bridge;
+
+
 var jwt    = require('jsonwebtoken'); // zum erstellen und verifizieren von tockens
 var config = require('./config'); // zum getten der config datei
 var User   = require('./app/models/user'); // getten der mongose datei
-var form        = Form(User);
-var mongo = require('mongodb');
+
 // =================================================================
 // configuration ===================================================
 // =================================================================
@@ -23,21 +22,6 @@ app.set('superSecret', config.secret); // geheime variable
 // zum Parsen
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(express.static('static'));
-app.use(express.json());
-
-
-mongo.MongoClient.connect(config.database)
-    .then(function (conn) {
-        return conn.collection('riko493');
-    })
-    .then((result) => {
-        db = result
-        console.log(result);
-    })
-    .catch((err) => {
-        console.log(err);
-    });
 
 
 // morgen zum logen in der konsole
@@ -72,28 +56,8 @@ var apiRoutes = express.Router();
 
 
 
-apiRoutes.get('/api/users', function (req, res)  {
-  User.insertOne({
-      lname:req.body.lname
-  })
 
-});
-       /* var u = new User({
-            lname: req.body.,
-            vname: v_name,
-            nname: n_name,
-            password: password,
-            anschrift: anschrift,
-            admin: false,
 
-        })
-        user.save(function (err) {
-            if (err) throw err;
-
-            console.log('Benutzer erfolgreich gespeichert');
-            res.json({ success: true });
-
-        })*/
 
 
 // standart route (http://localhost:8080)
@@ -102,6 +66,17 @@ app.get('/', function(req, res) {
 });
 
 
+
+apiRoutes.post("/users", (req, res) => {
+    var myData = new User(req.body);
+    myData.save()
+        .then(item => {
+            res.send("item saved to database");
+        })
+        .catch(err => {
+            res.status(400).send("unable to save to database");
+        });
+});
 
 // ---------------------------------------------------------
 // authentication (no middleware necessary since this isnt authenticated)
