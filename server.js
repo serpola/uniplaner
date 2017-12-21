@@ -23,7 +23,7 @@ app.set('superSecret', config.secret); // geheime variable
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-
+app.use(express.static('static'))
 // morgen zum logen in der konsole
 app.use(morgan('dev'));
 
