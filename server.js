@@ -1,5 +1,5 @@
 // =================================================================
-// get the packages we need ========================================
+// get the packages we need from burak ========================================
 // =================================================================
 var express 	= require('express');
 var app         = express();
@@ -31,7 +31,7 @@ app.use(morgan('dev'));
 // routes ==========================================================
 // =================================================================
 app.get('/setup', function(req, res) {
-
+//why
     // beispiel benutzer erstellen
     var nick = new User({
         lname: 'admin',
