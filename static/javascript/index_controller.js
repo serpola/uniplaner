@@ -4,3 +4,8 @@ $(document).ready(function () {
         $('.option').toggleClass('scale-on');
     });
 });
+
+
+var reg = new Vue({
+    
+})
