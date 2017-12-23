@@ -8,7 +8,12 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+<<<<<<< Updated upstream
     <orderEntry type="library" name="jQuery UI-1.10.2" level="application" />
     <orderEntry type="library" name="jQuery-2.0.0" level="application" />
+=======
+    <orderEntry type="library" name="jQuery-2.0.0" level="application" />
+    <orderEntry type="library" name="jQuery UI-1.10.2" level="application" />
+>>>>>>> Stashed changes
   </component>
 </module>

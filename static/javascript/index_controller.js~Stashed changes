@@ -1,0 +1,12 @@
+var reg = new Vue({
+    element:'#_regist',
+    methods:{
+        abschicken:function () {
+            alert("test");
+
+        }
+    }
+
+
+
+})
