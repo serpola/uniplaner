@@ -9,7 +9,7 @@ var mongoose    = require('mongoose');
 var jwt    = require('jsonwebtoken'); // zum erstellen und verifizieren von tockens
 var config = require('./config'); // zum getten der config datei
 //Modele einbinden
-
+//bah
 var User   = require('./app/models/user'); // getten der mongose datei
 var Noten  = require('./app/models/noten');
 var ToDO   = require('./app/models/todo');
