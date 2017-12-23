@@ -6,18 +6,20 @@ var app         = express();
 var bodyParser  = require('body-parser');
 var morgan      = require('morgan');
 var mongoose    = require('mongoose');
-
-
 var jwt    = require('jsonwebtoken'); // zum erstellen und verifizieren von tockens
 var config = require('./config'); // zum getten der config datei
-var User   = require('./app/models/user'); // getten der mongose datei
+//Modele einbinden
 
+var User   = require('./app/models/user'); // getten der mongose datei
+var Noten  = require('./app/models/noten');
+var ToDO   = require('./app/models/todo');
+var Kalender = require('./app/models/kalender');
 // =================================================================
 // configuration ===================================================
 // =================================================================
 var port = process.env.PORT || 8080;
 mongoose.connect(config.database); // db verbindung
-app.set('superSecret', config.secret); // geheime variable
+app.set('Secret', config.secret); // geheime variable
 
 // zum Parsen
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -31,14 +33,13 @@ app.use(morgan('dev'));
 // routes ==========================================================
 // =================================================================
 app.get('/setup', function(req, res) {
-//why
     // beispiel benutzer erstellen
     var nick = new User({
         lname: 'admin',
-        vname: 'asdsasd',
-        nname: 'asdsada',
+        vname: 'max',
+        nname: 'musterman',
         password: 'password',
-        anschrift: 'asdasdasd',
+        anschrift: 'musterstrasse 1',
         admin: true
     });
     nick.save(function(err) {
@@ -54,29 +55,12 @@ app.get('/setup', function(req, res) {
 // ---------------------------------------------------------
 var apiRoutes = express.Router();
 
-
-
-//blalbla
-
-
-
 // standart route (http://localhost:8080)
 app.get('/', function(req, res) {
-    res.send('Hello! The API is at http://localhost:' + port + '/api');
+    res.send('Hallo die API läuft auf http://localhost:' + port + '/api');
 });
 
 
-
-apiRoutes.post("/users", (req, res) => {
-    var myData = new User(req.body);
-    myData.save()
-        .then(item => {
-            res.send("item saved to database");
-        })
-        .catch(err => {
-            res.status(400).send("unable to save to database");
-        });
-});
 
 // ---------------------------------------------------------
 // authentication (no middleware necessary since this isnt authenticated)
@@ -86,7 +70,7 @@ apiRoutes.post('/authenticate', function(req, res) {
 
     // find the user
     User.findOne({
-        name: req.body.name
+        lname: req.body.lname
     }, function(err, user) {
 
         if (err) throw err;
@@ -105,7 +89,7 @@ apiRoutes.post('/authenticate', function(req, res) {
                 var payload = {
                     admin: user.admin
                 }
-                var token = jwt.sign(payload, app.get('superSecret'), {
+                var token = jwt.sign(payload, app.get('Secret'), {
                     expiresIn: 86400 // expires in 24 hours
                 });
 
@@ -160,18 +144,81 @@ apiRoutes.post('/authenticate', function(req, res) {
 // authenticated routes
 // ---------------------------------------------------------
 apiRoutes.get('/', function(req, res) {
-    res.json({ message: 'Wilkommmen bei Unserer Api' });
+    res.json({ message: 'Willkommmen bei Unserer Api' });
 });
 
+
+//CRUD Users
 apiRoutes.get('/users', function(req, res) {
     User.find({}, function(err, users) {
         res.json(users);
     });
 });
 
+apiRoutes.post("/users", (req, res) => {
+    var myData = new User(req.body);
+    myData.save()
+        .then(item => {
+            res.send("item saved to database");
+        })
+        .catch(err => {
+            res.status(400).send("unable to save to database");
+        });
+});
+
+//CRUD Noten
+apiRoutes.get('/noten', function (req, res){
+    Noten.find({}, function (err,noten) {
+        res.json(noten);
+
+    });
+});
+apiRoutes.post('/noten', function (req, res) {
+    var daten = new Noten(req.body);
+    daten.save()
+        .then(item =>{
+            res.send('Noten wurden auf die DB gespeichert');
+        })
+        .catch(err=>{
+            res.status(400).send('Konnte nicht auf der DB gespeichert werden');
+        });
+});
+
+//CRUD to-Do
+apiRoutes.get('/todo', function (req, res) {
+    ToDO.find({}, function (err, todo) {
+        res.json(todo);
+    });
+
+});
+
+apiRoutes.post('/todo', function (req, res) {
+    var daten = new ToDO(req.body);
+    daten.save()
+        .then(item =>{res.send('Noten wurden auf die DB gespeichert');})
+        .catch(err=>{res.status(400).send('Konnte nicht auf der DB gespeichert werden')
+        });
+
+});
+
+
+apiRoutes.put('/todo', function (req, res) {
+    ToDO.updateOne({},)
+
+})
+
 apiRoutes.get('/check', function(req, res) {
     res.json(req.decoded);
 });
+
+
+
+
+
+
+
+
+
 
 app.use('/api', apiRoutes);
 
