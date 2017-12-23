@@ -14,7 +14,7 @@
 
 <h1> Tragen Sie hier Ihre Kontaktdaten ein</h1>
 
-<form id = "regist" v-on:submit.prevent>
+<form id = "regist" action = "http://localhost:8080/api/users" method="post" enctype="application/json">
 <label for="lname" class="sr-only">Login Name</label>
 <input type="text" name="lname"id="lname" placeholder="Login Name"><br>
 
