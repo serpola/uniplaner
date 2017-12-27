@@ -8,6 +8,7 @@ var morgan      = require('morgan');
 var mongoose    = require('mongoose');
 var jwt    = require('jsonwebtoken'); // zum erstellen und verifizieren von tockens
 var config = require('./config'); // zum getten der config datei
+var cors = require('cors');
 //Modele einbinden
 //bah
 var User   = require('./app/models/user'); // getten der mongose datei
@@ -24,7 +25,7 @@ app.set('Secret', config.secret); // geheime variable
 // zum Parsen
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
+app.use(cors());
 app.use(express.static('static'))
 // morgen zum logen in der konsole
 app.use(morgan('dev'));

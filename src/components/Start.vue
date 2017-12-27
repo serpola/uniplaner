@@ -16,14 +16,14 @@
 
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" />
 
-    <img src="pics/icons_index/kalender/kalender_64.png" alt="Kalender">
+    <img src="/src/pics/icons_index/kalender/kalender_64.png" alt="Kalender">
     <router-link to="Kalender">Kalender</router-link>
     <br>
-    <img src="pics/icons_index/grades/grades_64.png" alt="Noten">
+    <img src="/src/pics/icons_index/grades/grades_64.png" alt="Noten">
     <router-link to="Noten">Noten</router-link>
     <br>
 
-    <img src="pics/icons_index/notepade/notepad_64.png" alt="Notizen">
+    <img src="/src/pics/icons_index/notepade/notepad_64.png" alt="Notizen">
     <router-link to="toDo">ToDo</router-link>
 </div>
 </template>
