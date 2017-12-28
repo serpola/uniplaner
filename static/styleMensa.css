@@ -6,7 +6,6 @@
     
 }
 
-
 header{
  position: fixed;
   top: 0;
@@ -15,7 +14,7 @@ header{
   background: orange;
   text-align: center;
   font-family: sans-serif;
-  color: white;
+  color: white
 }
 
 body {
