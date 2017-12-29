@@ -4,61 +4,37 @@
     <head>
     <meta charset="UTF-8">
     <title>    Uniplaner    </title>
+         <link rel="stylesheet" type="text/css" href="styleToDo.css">
+        <script language="javascript" type="text/javascript" src="toDo_javas.js"></script>
     </head>
     
     <link rel="stylesheet" href="style.css" type="text/css">
     
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" />
     
+
     <body>
-        <header>
+        
+         <header>
             <div><p>Uni-Planer</p>
             <a id="lgout" href="../index.html">Abmelden</a></div>
         </header>
         
-        <p id="todo">TO-DO Liste</p>
+        <p id="todo">Deine To-Do Liste</p>
+    
+        <p id="beschreibung">
+            Du hast vergessen die Hausarbeit in Mathe zu machen oder dein Referat? Kein Problem! Mit diesem Tool kannst du deine Erledigungen eintragen und sie abhacken, wenn sie erledigt sind.
+        </p>
         
-        <p id="description">Du hast vergessen die Hausarbeit in Mathe zu machen oder dein Referat? Kein Problem! Mit diesem Tool kannst du deine Erledigungen eintragen und sie abhacken, wenn sie erledigt sind. </p>
-        
-        <div class="buttons">
-            <ul class="nav">
-        
-                <button onclick="add()">Neuer Eintrag</button>
-                <button onclick="entfernen()">Letzten Eintrag löschen</button>
-            </ul>
-        </div>
-        
-        <div class="to-do">    
-            
-            <table id="liste">
-                
-               <caption>To-Do Liste</caption>
-                    
-                <tr>
-                    <td>
-                        <input type="checkbox">
-                        <input type="text">
-                    </td>
-                </tr>
-                
-                <tr>
-                    <td>
-                        <input type="checkbox">
-                        <input type="text">
-                    </td>
-                </tr>
-                
-                <tr>
-                    <td>
-                        <input type="checkbox">
-                        <input type="text">
-                    </td>
-                </tr>
-                
-            </table>
-            
-        </div>    
-        
-    </body>
+<div id="myDIV" class="ueberschrift">
+  <input type="text" id="myInput" placeholder="Aufgabe...">
+  <span onclick="newElement()" class="addBtn">Add</span>
+</div>
 
+<ul id="myUL">
+  <li>Mathe Hausarbeit</li>
+  <li class="checked">WT-Projekt</li>
+</ul>
+
+    </body>
 </html>
