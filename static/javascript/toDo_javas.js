@@ -1,4 +1,4 @@
-    // Create a "close" button and append it to each list item
+    // Close-Button erstellen und an jedes Listenelement anhängen
     var myNodelist = document.getElementsByTagName("LI");
     var i;
     for (i = 0; i < myNodelist.length; i++) {
@@ -34,7 +34,7 @@
       var t = document.createTextNode(inputValue);
       li.appendChild(t);
       if (inputValue === '') {
-        alert("Du musst was reinschreiben!");
+        alert("Du musst etwas reinschreiben!");
       } else {
         document.getElementById("myUL").appendChild(li);
       }
