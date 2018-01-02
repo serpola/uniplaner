@@ -1,6 +1,8 @@
 <html>
 <head>
 	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
 	<link rel="stylesheet" type="text/css" href="stylenoten.css">
 </head>
 <body>
@@ -11,9 +13,9 @@
        Uni-Planer</p>
        <a id="lgout" href="index.html">Abmelden</a></div></header>
 
-      <div id="app">
-      	<h1>{{ message}}</h1>
-      </div>
+    <div id="app">
+        <h1>{{ message}}</h1> <!--Beispiel für vue -->
+    </div>
     
 	<div id="tables">
 		<table>
@@ -38,7 +40,7 @@
 		</tr>
 		</table>
 	</div>
-	<div id="buttons"><br>
+	<div id="buttons">
 		<button id="newEntry" >Neuen Eintrag generieren</button><br><!--neue Tabellenzeile generieren -->
 		<button id="getECTS" >ECTS berechnen</button><!-- Summe der ECTS berechnen-->
 		<button id="getNotes" >Notendurchschnitt berechnen</button><!--Durchschnitt der bestandenen Noten berechnen -->
