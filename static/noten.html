@@ -1,19 +1,21 @@
 <html>
 <head>
-	<!--UNIPLANER -->
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
 	<link rel="stylesheet" type="text/css" href="stylenoten.css">
 </head>
 <body>
     <script src="javascript/noten_java.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-    
+    <script src="C:\Users\ella\Documents\Informatik~_~\WT\vue.js"></script>
+
      <header><div id="header"><p>  
        Uni-Planer</p>
        <a id="lgout" href="index.html">Abmelden</a></div></header>
 
-      <div id="app">
-      	<h1>{{ message}}</h1>
-      </div>
+    <div id="app">
+        <h1>{{ message}}</h1> <!--Beispiel für vue -->
+    </div>
     
 	<div id="tables">
 		<table>
@@ -21,33 +23,27 @@
 			<th>Modul</th>
 			<th>Note</th>
 			<th>ECTS</th>
-			<th>Datum</th>
 		</tr>
 		<tr>
 			<td><input type="text" name="modul" v-model:"blabla"></td> <!--Inputfelder -->
 			<td><input type="text" name="note" v-model:"blabla"></td>
 			<td><input type="text" name="ects" v-model:"blabla"></td>
-			<td><input type="text" name="datum" v-model:"blabla"></td>
 		</tr>
 		<tr>
 			<td><input type="text" name="modul" v-model:"blabla"></td> <!--Inputfelder -->
 			<td><input type="text" name="note" v-model:"blabla"></td>
 			<td><input type="text" name="ects" v-model:"blabla"></td>
-			<td><input type="text" name="datum" v-model:"blabla"></td>
-		</tr>
 		<tr>
 			<td><input type="text" name="modul" v-model:"blabla"></td> <!--Inputfelder -->
 			<td><input type="text" name="note" v-model:"blabla"></td>
 			<td><input type="text" name="ects" v-model:"blabla"></td>
-			<td><input type="text" name="datum" v-model:"blabla"></td>
 		</tr>
-		<!-- Mit JS durch Button neue Tabellenzeile generieren -->
 		</table>
 	</div>
-	<div id="buttons"> Brauch ich die Funktionen dann überhaupt ? 
-		<button id="newEntry" onclick="newTableRow()">Neuen Eintrag generieren</button><br><!--neue Tabellenzeile generieren -->
-		<button id="getECTS" onclick="CalculatorECTS()">ECTS berechnen</button><!-- Summe der ECTS berechnen-->
-		<button id="getNotes" onclick="AverageGrades()">Notendurchschnitt berechnen</button><!--Durchschnitt der bestandenen Noten berechnen -->
+	<div id="buttons">
+		<button id="newEntry" >Neuen Eintrag generieren</button><br><!--neue Tabellenzeile generieren -->
+		<button id="getECTS" >ECTS berechnen</button><!-- Summe der ECTS berechnen-->
+		<button id="getNotes" >Notendurchschnitt berechnen</button><!--Durchschnitt der bestandenen Noten berechnen -->
 	</div>
 </body>
 </html>

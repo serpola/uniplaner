@@ -45,11 +45,99 @@
 </template>
 
 <script>
-    export default {
-        name: "noten"
+    //export default {
+        //name: "noten"
+    //}
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello World!'
+        }
+    });
+    let tables = new Vue({
+        el: '#tables',
+        data: {
+            blabla: 'Hello World!'
+        }
+    });
+    let buttons = new Vue({
+            el: '#buttons',
+            data: {
+                tablerow:
+            <td><input type="text" name="modul" ></td>
+            <td><input type="text" name="note" ></td>
+            <td><input type="text" name="ects" ></td>
+        },
+        methods: {
+        add: function() {
+            this.$data.tablerow.push(this.$refs['my-input'].value)
+        },
     }
+    })
 </script>
 
 <style scoped>
+    header
+    {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: orange;
+        text-align: center;
+        font-family: sans-serif;
+        color: white
+    }
+    header p{
+        font-size: 30px;
+    }
+    button{
+        position: relative; /* or absolute ? */
+        background-color: orange;
+        font-size: 16px;
+        margin-top: 5px;
+        margin-left: 3px;
+    }
+    #buttons{
+        margin-top: 20px;
+        text-align: center;
+    }
+    #tables{
+        margin-top: 30px;
+    }
+    table {
+        margin: auto;
 
+    }
+    table td{ /* wieso sind diese rahmen so komisch beschissen ? >.< */
+        border-style: solid; /*sieht zwar nicht perfekt aus aber ich lass es mal so.*/
+
+    }
+
+    header
+    {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: orange;
+        text-align: center;
+        font-family: sans-serif;
+        color: white
+    }
+
+    body {
+        margin-left: 30px;
+        margin-right: 30px;
+        background: white;
+        padding-top: 90px;
+    }
+
+    #lgout{
+
+        color: white;
+        margin-left: auto;
+        float: right;
+
+    }
 </style>
