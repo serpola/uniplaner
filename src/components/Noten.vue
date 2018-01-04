@@ -3,9 +3,6 @@
         Uni-Planer</p>
         <a id="lgout" href="index.html">Abmelden</a></div></header>
 
-    <div id="app">
-        <h1>{{ message}}</h1>
-    </div>
 
     <div id="tables">
         <table>
@@ -53,12 +50,36 @@
 
 
             }
-        }
+        },
 
-        methods:{
-            addRow: function() {}
-        }
+        methods: {
+            addRow: function () {
+                var currentTable = document.getElementsByTagName("tr");
+                var newTD1 = document.createElement("td");
+                var newTD2 = document.createElement("td");
+                var newTD3 = document.createElement("td");
+                var newContent1 = document.createElement("input");
+                newContent1.setAttribute("type", "text");
+                newContent1.setAttribute("name", "modul");
+                newContent1.setAttribute("v-model", "user.modul");
+                var newContent2 = document.createElement("input");
+                newContent2.setAttribute("type", "text");
+                newContent2.setAttribute("name", "note");
+                newContent2.setAttribute("v-model", "user.note");
+                var newContent3 = document.createElement("input");
+                newContent3.setAttribute("type", "text");
+                newContent3.setAttribute("name", "ects");
+                newContent3.setAttribute("v-model", "user.ects");
+                newTD1.appendChild(newContent1);
+                newTD2.appendChild(newContent2);
+                newTD3.appendChild(newContent3);
+                var newTR = document.createElement("tr");
+                newTR.appendChild(newTD1);
+                document.body.insertAfter(newTD2, newTD1);
+                document.body.insertAfter(bewTD3, newTD2);
 
+            }
+        }
 
    /* let buttons = new Vue({
             el: '#buttons',
