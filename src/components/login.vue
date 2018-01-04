@@ -22,7 +22,7 @@
 
 <script>
 
-   // import auth from '../auth/authentifizierung'
+    import auth from '../auth/authentifizierung'
     export default {
         data(){
             return{

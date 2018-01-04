@@ -1,4 +1,4 @@
-<template>
+<template xmlns:v-model="http://www.w3.org/1999/xhtml">
     <div><header><div id="header"><p>
         Uni-Planer</p>
         <a id="lgout" href="index.html">Abmelden</a></div></header>
@@ -13,41 +13,51 @@
                 <th>Modul</th>
                 <th>Note</th>
                 <th>ECTS</th>
-                <th>Datum</th>
             </tr>
             <tr>
-                <td><input type="text" name="modul" v-model:"blabla"></td> <!--Inputfelder -->
-                <td><input type="text" name="note" v-model:"blabla"></td>
-                <td><input type="text" name="ects" v-model:"blabla"></td>
-                <td><input type="text" name="datum" v-model:"blabla"></td>
+                <td><input type="text" name="modul" v-model:"user.modul" ></td> <!--Inputfelder -->
+                <td><input type="text" name="note" v-model:"user.name" ></td>
+                <td><input type="text" name="ects" v-model:"user.ects" ></td>
             </tr>
             <tr>
-                <td><input type="text" name="modul" v-model:"blabla"></td> <!--Inputfelder -->
-                <td><input type="text" name="note" v-model:"blabla"></td>
-                <td><input type="text" name="ects" v-model:"blabla"></td>
-                <td><input type="text" name="datum" v-model:"blabla"></td>
+                <td><input type="text" name="modul" v-model:"user.modul" ></td> <!--Inputfelder -->
+                <td><input type="text" name="note" v-model:"user.name" ></td>
+                <td><input type="text" name="ects" v-model:"user.ects" ></td>
             </tr>
             <tr>
-                <td><input type="text" name="modul" v-model:"blabla"></td> <!--Inputfelder -->
-                <td><input type="text" name="note" v-model:"blabla"></td>
-                <td><input type="text" name="ects" v-model:"blabla"></td>
-                <td><input type="text" name="datum" v-model:"blabla"></td>
+                <td><input type="text" name="modul" v-model:"user.modul" ></td> <!--Inputfelder -->
+                <td><input type="text" name="note" v-model:"user.name" ></td>
+                <td><input type="text" name="ects" v-model:"user.ects" ></td>
             </tr>
             <!-- Mit JS durch Button neue Tabellenzeile generieren -->
         </table>
     </div>
-    <div id="buttons"> Brauch ich die Funktionen dann überhaupt ?
-        <button id="newEntry" onclick="newTableRow()">Neuen Eintrag generieren</button><br><!--neue Tabellenzeile generieren -->
-        <button id="getECTS" onclick="CalculatorECTS()">ECTS berechnen</button><!-- Summe der ECTS berechnen-->
-        <button id="getNotes" onclick="AverageGrades()">Notendurchschnitt berechnen</button><!--Durchschnitt der bestandenen Noten berechnen -->
+    <div id="buttons">
+        <button id="newEntry" >Neuen Eintrag generieren</button><br><!--neue Tabellenzeile generieren -->
+        <button id="getECTS" >ECTS berechnen</button><!-- Summe der ECTS berechnen-->
+        <button id="getNotes" >Notendurchschnitt berechnen</button><!--Durchschnitt der bestandenen Noten berechnen -->
     </div>
     </div>
 </template>
 
 <script>
-    //export default {
-        //name: "noten"
-    //}
+    export default {
+        name: "noten",
+
+        methods:{
+            addEntry: function () {
+                let uri = 'http://localhost:8080/api/noten';
+                this.axios.post(uri, this.user).then((response) => {
+                    this.$router.push({name: 'modul'})
+                })
+
+
+            }
+        }
+
+        methods:{
+            addRow: function() {}
+        }
 
 
    /* let buttons = new Vue({
@@ -64,6 +74,7 @@
         },
     }
     })*/
+    }
 </script>
 
 <style scoped>
