@@ -30,7 +30,7 @@
     <router-link to="toDo">ToDo</router-link>
     <br>
 
-    <img src="pics/icons_index/mensa/mensa_64.png">
+    <img src="/src/pics/icons_index/mensa/mensa_64.png">
     <router-link to="Mensa">Mensa</router-link>
 </div>
 </template>

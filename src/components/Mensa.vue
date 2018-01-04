@@ -3,7 +3,7 @@
     <p id="beschreibung">Hier findest du den Mensaplan deiner Hochschule. Scroll einfach durch und such sie.</p>
 
 
-    <div id="app">
+    <div id="mens" v-bind:onload="mounted">
 
         <div id="progress">
             <h1>
@@ -36,16 +36,7 @@
     export default {
         name: "mensa",
 
-        el: '#app',
-        mounted: function() {
-            this.$http.get(`//openmensa.org/api/v2/canteens/`)
-                .then(resp => {
-                    console.log(resp.body)
-                    this.$data.canteens = resp.body
-                    this.$data.progress = '100%'
-                })
-                .catch(err => console.log(err))
-        },
+
         data: {
             progress: 0,
             canteens: [],
@@ -60,11 +51,48 @@
                         console.log(resp.body)
                         this.$data.meals = resp.body
                     })
-            }
+            },
+
+
+            mounted: function() {
+                this.$http.get(`//openmensa.org/api/v2/canteens/`)
+                    .then(resp => {
+                        console.log(resp.body)
+                        this.$data.canteens = resp.body
+                        this.$data.progress = '100%'
+                    })
+                    .catch(err => console.log(err))
+            },
         }
     }
 </script>
 
-<style scoped>
+<style>
+    #lgout{
+
+        color: white;
+        margin-left: auto;
+        float: right;
+
+    }
+
+    header{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: orange;
+        text-align: center;
+        font-family: sans-serif;
+        color: white
+    }
+
+    body {
+        margin-left: 30px;
+        margin-right: 30px;
+        background: white;
+        padding-top: 90px;
+        font-family: sans-serif;
+    }
 
 </style>
