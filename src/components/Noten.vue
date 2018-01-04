@@ -48,19 +48,9 @@
     //export default {
         //name: "noten"
     //}
-    var app = new Vue({
-        el: '#app',
-        data: {
-            message: 'Hello World!'
-        }
-    });
-    let tables = new Vue({
-        el: '#tables',
-        data: {
-            blabla: 'Hello World!'
-        }
-    });
-    let buttons = new Vue({
+
+
+   /* let buttons = new Vue({
             el: '#buttons',
             data: {
                 tablerow:
@@ -73,7 +63,7 @@
             this.$data.tablerow.push(this.$refs['my-input'].value)
         },
     }
-    })
+    })*/
 </script>
 
 <style scoped>

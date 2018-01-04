@@ -14,7 +14,7 @@ import Noten    from './components/Noten.vue';
 import Mensa from './components/Mensa.vue';
 import toDo from './components/toDo.vue';
 import App from './App.vue';
-import auth from './auth/authentifizierung';
+//import auth from './auth/authentifizierung';
 import 'vue-event-calendar/dist/style.css'
 import vueEventCalendar from 'vue-event-calendar/dist/index.js';
 

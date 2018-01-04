@@ -3,7 +3,7 @@
     <header>
         <div>
         <p>Uni-Planer</p>
-        <router-link to="/" id="lgn" v-if="user.authenticated" onclick="logout()">Abmelden</router-link>
+        <router-link to="/" id="lgn" >Abmelden</router-link>
        </div>
     </header>
 
@@ -28,24 +28,16 @@
 
     <img src="/src/pics/icons_index/notepade/notepad_64.png" alt="Notizen">
     <router-link to="toDo">ToDo</router-link>
+    <br>
+
+    <img src="pics/icons_index/mensa/mensa_64.png">
+    <router-link to="Mensa">Mensa</router-link>
 </div>
 </template>
 
 <script>
-   // v-if="user.authenticated"
-   import auth from '../auth/authentifizierung'
-    export default {
-        name: "start",
 
-        data(){
-            return{
-                user: auth.user
-            }
-        },
-        methods(){
-            auth.logout()
-        }
-    }
+
 </script>
 
 <style>
