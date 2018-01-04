@@ -1,5 +1,5 @@
 // =================================================================
-// get the packages we need from burak ========================================
+// get the packages  ========================================
 // =================================================================
 var express 	= require('express');
 var app         = express();
@@ -9,23 +9,25 @@ var mongoose    = require('mongoose');
 var jwt    = require('jsonwebtoken'); // zum erstellen und verifizieren von tockens
 var config = require('./config'); // zum getten der config datei
 var cors = require('cors');
+var http            = require('http');
 //Modele einbinden
-//bah
 var User   = require('./app/models/user'); // getten der mongose datei
 var Noten  = require('./app/models/noten');
 var ToDO   = require('./app/models/todo');
 var Kalender = require('./app/models/kalender');
+
+
+
 // =================================================================
 // configuration ===================================================
 // =================================================================
 var port = process.env.PORT || 8080;
 mongoose.connect(config.database); // db verbindung
 app.set('Secret', config.secret); // geheime variable
-
+app.use(cors());// damit der server CRUD annimmt
 // zum Parsen
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(cors());
 app.use(express.static('static'))
 // morgen zum logen in der konsole
 app.use(morgan('dev'));
@@ -50,6 +52,8 @@ app.get('/setup', function(req, res) {
         res.json({ success: true });
     });
 });
+
+
 
 // ---------------------------------------------------------
 // get an instance of the router for api routes
@@ -90,14 +94,13 @@ apiRoutes.post('/authenticate', function(req, res) {
                 var payload = {
                     admin: user.admin
                 }
-                var token = jwt.sign(payload, app.get('Secret'), {
-                    expiresIn: 86400 // expires in 24 hours
+                var token = jwt.sign(payload, app.get('Secret'), { expiresIn: 86400 // expires in 24 hours
                 });
 
                 res.json({
                     success: true,
                     message: 'Enjoy your token!',
-                    token: token
+                    id_token: token
                 });
             }
 
@@ -109,7 +112,7 @@ apiRoutes.post('/authenticate', function(req, res) {
 // ---------------------------------------------------------
 // route middleware to authenticate and check token
 // ---------------------------------------------------------
-/*apiRoutes.use(function(req, res, next) {
+apiRoutes.use(function(req, res, next) {
 
     // check header or url parameters or post parameters for token
     var token = req.body.token || req.param('token') || req.headers['x-access-token'];
@@ -118,7 +121,7 @@ apiRoutes.post('/authenticate', function(req, res) {
     if (token) {
 
         // verifies secret and checks exp
-        jwt.verify(token, app.get('superSecret'), function(err, decoded) {
+        jwt.verify(token, app.get('Secret'), function(err, decoded) {
             if (err) {
                 return res.json({ success: false, message: 'Failed to authenticate token.' });
             } else {
@@ -139,7 +142,7 @@ apiRoutes.post('/authenticate', function(req, res) {
 
     }
 
-});*/
+});
 
 // ---------------------------------------------------------
 // authenticated routes
@@ -211,14 +214,6 @@ apiRoutes.put('/todo', function (req, res) {
 apiRoutes.get('/check', function(req, res) {
     res.json(req.decoded);
 });
-
-
-
-
-
-
-
-
 
 
 app.use('/api', apiRoutes);

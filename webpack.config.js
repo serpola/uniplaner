@@ -30,6 +30,10 @@ module.exports = {
                 use: {
                     loader: 'vue-loader'
                 }
+            },
+            {
+                test: /\.css$/,
+                loader: "style-loader!css-loader?importLoaders=1"
             }
         ]
     },

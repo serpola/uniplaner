@@ -1,9 +1,11 @@
 <template>
 <div>
-    <header><div><p>
-        Uni-Planer</p>
-        <router-link to="login">Anmelden</router-link>
-       </div></header>
+    <header>
+        <div>
+        <p>Uni-Planer</p>
+        <router-link to="/" id="lgn" v-if="user.authenticated" onclick="logout()">Abmelden</router-link>
+       </div>
+    </header>
 
     <br>
     <article id="indx">
@@ -12,12 +14,13 @@
         Herzlich Willkommen bei deinem individuellen UniPlaner.
         Hier kannst du deinen Unikalender, deine To-Do-Liste und deine erhaltenen Noten eintragen und verwalten.
         Zusätzlich kannst du nachschauen welche Gerichte eure Mensa heute zu bieten hat.
-    </p></article>
+        </p>
+    </article>
 
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" />
 
     <img src="/src/pics/icons_index/kalender/kalender_64.png" alt="Kalender">
-    <router-link to="Kalender">Kalender</router-link>
+    <router-link to="Kalender" >Kalender</router-link>
     <br>
     <img src="/src/pics/icons_index/grades/grades_64.png" alt="Noten">
     <router-link to="Noten">Noten</router-link>
@@ -29,8 +32,19 @@
 </template>
 
 <script>
+   // v-if="user.authenticated"
+   import auth from '../auth/authentifizierung'
     export default {
-        name: "start"
+        name: "start",
+
+        data(){
+            return{
+                user: auth.user
+            }
+        },
+        methods(){
+            auth.logout()
+        }
     }
 </script>
 

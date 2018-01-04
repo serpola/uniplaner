@@ -1,47 +1,91 @@
 <template>
-   <div>
 
-    <div class="month">
-        <ul>
-            <li class="prev">&#10094;</li>
-            <li class="next">&#10095;</li>
-            <li>August<br><span style="font-size:18px">2017</span></li>
-        </ul>
-    </div>
 
-    <ul class="weekdays">
-        <li>Mo</li>
-        <li>Tu</li>
-        <li>We</li>
-        <li>Th</li>
-        <li>Fr</li>
-        <li>Sa</li>
-        <li>Su</li>
-    </ul>
+    <div><div>
+        <header>
+            <div>
+                <p>Uni-Planer</p>
 
-    <ul class="days">
-        <li>1</li>
-        <li>2</li>
-        <li>3</li>
-        <li>4</li>
-        <li>5</li>
-        <li>6</li>
-        <li>7</li>
-        <li>8</li>
-        <li>9</li>
-        <li><span class="active">10</span></li>
-        <li>11</li>
-        ...etc
-    </ul>
-   </div>
+            </div>
+        </header>
+        </div>
+<div>
+    <vue-event-calendar
+            :events="demoEvents"
+            @day-changed="handleDayChanged"
+            @month-changed="handleMonthChanged"
+    ></vue-event-calendar>
+
+
+</div>
+</div>
 </template>
 
 <script>
+    let today = new Date()
     export default {
-        name: "kalender"
+        name: 'kalender',
+        data () {
+            return {
+                demoEvents: [{
+                    date: `${today.getFullYear()}/${today.getMonth() + 1}/15`,
+                    title: 'Title-1',
+                    desc: 'longlonglong description'
+                },{
+                    date: `${today.getFullYear()}/${today.getMonth() + 1}/24`,
+                    title: 'Title-2'
+                },{
+                    date: `${today.getFullYear()}/${today.getMonth() === 11 ? 1 : today.getMonth() + 2}/06`,
+                    title: 'Title-3',
+                    desc: 'description'
+                }]
+            }
+        },
+        methods: {
+            handleDayChanged (data) {
+                console.log('date-changed', data)
+            },
+            handleMonthChanged (data) {
+                console.log('month-changed', data)
+            }
+        }
     }
 </script>
 
-<style scoped>
+<style scoped >
 
+    #app {
+        font-family: 'Avenir', Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        color: #2c3e50;
+        margin-top: 30px;
+    }
+
+    h1, h2, h3 {
+        font-weight: normal;
+        margin: 0;
+        padding: 0;
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    li {
+        display: inline-block;
+        margin: 0 10px;
+    }
+
+    a {
+        color: #42b983;
+    }
+    .t-center{
+        text-align: center;
+        margin: 20px;
+    }
+    .mt150{
+        margin-top: 150px;
+    }
 </style>
