@@ -30,7 +30,7 @@
         </table>
     </div>
     <div id="buttons">
-        <button id="newEntry" >Neuen Eintrag generieren</button><br><!--neue Tabellenzeile generieren -->
+        <button id="newEntry" v-on:click="addRow">Neuen Eintrag generieren</button><br><!--neue Tabellenzeile generieren -->
         <button id="getECTS" >ECTS berechnen</button><!-- Summe der ECTS berechnen-->
         <button id="getNotes" >Notendurchschnitt berechnen</button><!--Durchschnitt der bestandenen Noten berechnen -->
     </div>
@@ -52,7 +52,7 @@
             }
         },
 
-        methods: {
+        methods: { //hinzufügen einer neuen Tabllenzeile
             addRow: function () {
                 var currentTable = document.getElementsByTagName("tr");
                 var newTD1 = document.createElement("td");
