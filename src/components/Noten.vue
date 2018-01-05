@@ -5,6 +5,7 @@
 
 
     <div id="tables">
+        <form>
         <table>
             <tr><!-- Tabellenkopf -->
                 <th>Modul</th>
@@ -28,11 +29,12 @@
             </tr>
             <!-- Mit JS durch Button neue Tabellenzeile generieren -->
         </table>
+        </form>
     </div>
     <div id="buttons">
         <button id="newEntry" v-on:click="addRow">Neuen Eintrag generieren</button><br><!--neue Tabellenzeile generieren -->
-        <button id="getECTS" >ECTS berechnen</button><!-- Summe der ECTS berechnen-->
-        <button id="getNotes" >Notendurchschnitt berechnen</button><!--Durchschnitt der bestandenen Noten berechnen -->
+        <button id="getECTS" v-on:click="getEcts">ECTS berechnen</button><!-- Summe der ECTS berechnen-->
+        <button id="getNotes" v-on:click="getGradesAverage">Notendurchschnitt berechnen</button><!--Durchschnitt der bestandenen Noten berechnen -->
     </div>
     </div>
 </template>
@@ -40,6 +42,10 @@
 <script>
     export default {
         name: "noten",
+
+        data(){
+
+        },
 
         methods:{
             addEntry: function () {
@@ -49,10 +55,8 @@
                 })
 
 
-            }
-        },
-
-        methods: { //hinzufügen einer neuen Tabllenzeile
+            },
+        //hinzufügen einer neuen Tabllenzeile
             addRow: function () {
                 var currentTable = document.getElementsByTagName("tr");
                 var newTD1 = document.createElement("td");
@@ -74,12 +78,18 @@
                 newTD2.appendChild(newContent2);
                 newTD3.appendChild(newContent3);
                 var newTR = document.createElement("tr");
+                document.body.insertAfter(newTR, currentTable);
                 newTR.appendChild(newTD1);
                 document.body.insertAfter(newTD2, newTD1);
                 document.body.insertAfter(bewTD3, newTD2);
+            },
+            getEcts: function(){
+
+            },
+            getGradesAverage: function(){
 
             }
-        }
+        },
 
    /* let buttons = new Vue({
             el: '#buttons',
