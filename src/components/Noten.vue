@@ -84,9 +84,30 @@
                 document.body.insertAfter(bewTD3, newTD2);
             },
             getEcts: function(){
+                var i = 0;
+                var gesamt = 0;
+                while(1){ /* Solange es Ects gibt sollen sie zusammen gezählt werden. */
+                    // Ects = Ects an der Stelle i
+                    gesamt = gesamt; // + Ects
+                    i++;
+                }
 
             },
             getGradesAverage: function(){
+                var count;
+                var grade; //current Grade
+                var allGrades = 0;
+                var soluction;
+
+                for(var j = 0; j < tablelength; j++) {
+
+                    if (grade != NULL) {
+                        allGrades = allGrades + grade;
+                        count++;
+                    }
+                }
+
+                soluction = allGrades / count;
 
             }
         },
