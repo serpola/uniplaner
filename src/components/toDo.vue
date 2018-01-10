@@ -13,12 +13,12 @@
         
         <div id="myDIV" class="ueberschrift">
             <input type="text" id="myInput" placeholder="Aufgabe...">
-            <span onclick="newElement()" class="addBtn">Add</span>
+            <span onclick="newItem()" class="addBtn">Einfügen</span>
         </div>
 
         <ul id="myUL">
             <li>Mathe Hausarbeit</li>
-            <li class="checked">WT-Projekt</li>
+            <li>WT-Projekt</li>
             <li>Meet George</li>
         </ul>
    </div>
@@ -109,27 +109,6 @@ ul li:hover {
   background: #ddd;
 }
 
-/* When clicked on, add a background color and strike out text FUNKTIONIERT NICHTTT*/
-ul li.checked {
-  background: #FE9A2E;
-  color: #fff;
-  text-decoration: line-through;
-}
-
-/* Add a "checked" mark when clicked on */
-ul li.checked::before {
-  content: '';
-  position: absolute;
-  border-color: #fff;
-  border-style: solid;
-  border-width: 0 2px 2px 0;
-  top: 10px;
-  left: 16px;
-  transform: rotate(45deg);
-  height: 15px;
-  width: 7px;
-}
-
 /* Style the close button */
 .close {
   position: absolute;
@@ -167,6 +146,7 @@ input {
   padding: 10px;
   float: left;
   font-size: 16px;
+  color: black;
 }
 
 /* Style the "Add" button */

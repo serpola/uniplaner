@@ -23,7 +23,7 @@
     // Create a new list item when clicking on the "Add" button
  export default {
      newItem() {
-        var li = document.createElement("li");
+        var li = document.createElement("LI");
         var inputValue = document.getElementById("myInput").value;
         var t = document.createTextNode(inputValue);
         li.appendChild(t);
