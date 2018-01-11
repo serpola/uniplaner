@@ -1,5 +1,12 @@
-<template>
-<div>
+<template xmlns:v-model="http://www.w3.org/1999/xhtml">
+
+    <div>
+
+    <header>
+        <div><p>Uni-Planer</p>
+            <a id="lgout" href="../index.html">Abmelden</a></div>
+    </header>
+
     <p id="beschreibung">Hier findest du den Mensaplan deiner Hochschule. Scroll einfach durch und such sie.</p>
 
 
@@ -16,6 +23,7 @@
             </div>
         </div>
 
+        <!--
         <select v-if="canteens.length" v-on:change="load" v-model="canteenId">
             <option v-for="c in canteens" v-bind:value="c.id">{{ c.name }}</option>
         </select>
@@ -26,7 +34,7 @@
         <ul v-else>
             <li v-for="m in meals">{{ m.name }}</li>
         </ul>
-
+-->
     </div>
 </div>
 

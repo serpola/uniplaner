@@ -1,10 +1,10 @@
 <template>
     <div>
-   <div> <header>
+   <header>
         <div><p>Uni-Planer</p>
             <a id="lgout" href="../index.html">Abmelden</a></div>
     </header>
-   </div>
+
     <p id="todo">Deine To-Do Liste</p>
     
         <p id="beschreibung">

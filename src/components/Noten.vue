@@ -1,36 +1,34 @@
 <template xmlns:v-model="http://www.w3.org/1999/xhtml">
-    <div><header><div id="header"><p>
+    <div>
+        <header><div id="header"><p>
         Uni-Planer</p>
         <a id="lgout" href="index.html">Abmelden</a></div></header>
 
 
-    <div id="tables">
-        <form>
-        <table>
-            <tr><!-- Tabellenkopf -->
-                <th>Modul</th>
-                <th>Note</th>
-                <th>ECTS</th>
-            </tr>
-            <tr>
-                <td><input type="text" name="modul" v-model:"user.modul" ></td> <!--Inputfelder -->
-                <td><input type="text" name="note" v-model:"user.name" ></td>
-                <td><input type="text" name="ects" v-model:"user.ects" ></td>
-            </tr>
-            <tr>
-                <td><input type="text" name="modul" v-model:"user.modul" ></td> <!--Inputfelder -->
-                <td><input type="text" name="note" v-model:"user.name" ></td>
-                <td><input type="text" name="ects" v-model:"user.ects" ></td>
-            </tr>
-            <tr>
-                <td><input type="text" name="modul" v-model:"user.modul" ></td> <!--Inputfelder -->
-                <td><input type="text" name="note" v-model:"user.name" ></td>
-                <td><input type="text" name="ects" v-model:"user.ects" ></td>
-            </tr>
-            <!-- Mit JS durch Button neue Tabellenzeile generieren -->
-        </table>
-        </form>
-    </div>
+        <div id="app">
+            <table class="table">
+                <thead>
+                <tr>
+                    <td><strong>Modul</strong></td>
+                    <td><strong>Note</strong></td>
+                    <td><strong>ECT</strong></td>
+                    <td></td>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr v-for="row in rows">
+                    <td><input type="text" v-model="row.modul"></td>
+                    <td><input type="text" v-model="row.note"></td>
+                    <td><input type="text" v-model="row.ects"></td>
+                    <td><a @click="removeRow(row)">Remove</a></td>
+                </tr>
+                </tbody>
+            </table>
+            <div>
+                <button class="button btn-primary" @click="addRow">Add row</button>
+            </div>
+        </div>
     <div id="buttons">
         <button id="newEntry" v-on:click="addRow">Neuen Eintrag generieren</button><br><!--neue Tabellenzeile generieren -->
         <button id="getECTS" v-on:click="getEcts">ECTS berechnen</button><!-- Summe der ECTS berechnen-->
@@ -43,11 +41,22 @@
     export default {
         name: "noten",
 
-        data(){
-
+        data: {
+            rows: [
+                {modul: "",note: "", ect: ""},
+                {modul: "",note: "", ect: ""},
+            ]
         },
-
         methods:{
+            addRow: function(){
+                this.rows.push({modul: "",note: "", ect: ""},
+                );
+            },
+            removeRow: function(row){
+                //console.log(row);
+                this.rows.$remove(row);
+            }
+        },
             addEntry: function () {
                 let uri = 'http://localhost:8080/api/noten';
                 this.axios.post(uri, this.user).then((response) => {
@@ -56,33 +65,9 @@
 
 
             },
-        //hinzufügen einer neuen Tabllenzeile
-            addRow: function () {
-                var currentTable = document.getElementsByTagName("tr");
-                var newTD1 = document.createElement("td");
-                var newTD2 = document.createElement("td");
-                var newTD3 = document.createElement("td");
-                var newContent1 = document.createElement("input");
-                newContent1.setAttribute("type", "text");
-                newContent1.setAttribute("name", "modul");
-                newContent1.setAttribute("v-model", "user.modul");
-                var newContent2 = document.createElement("input");
-                newContent2.setAttribute("type", "text");
-                newContent2.setAttribute("name", "note");
-                newContent2.setAttribute("v-model", "user.note");
-                var newContent3 = document.createElement("input");
-                newContent3.setAttribute("type", "text");
-                newContent3.setAttribute("name", "ects");
-                newContent3.setAttribute("v-model", "user.ects");
-                newTD1.appendChild(newContent1);
-                newTD2.appendChild(newContent2);
-                newTD3.appendChild(newContent3);
-                var newTR = document.createElement("tr");
-                document.body.insertAfter(newTR, currentTable);
-                newTR.appendChild(newTD1);
-                document.body.insertAfter(newTD2, newTD1);
-                document.body.insertAfter(bewTD3, newTD2);
-            },
+
+
+
             getEcts: function(){
                 var i = 0;
                 var gesamt = 0;
@@ -110,22 +95,6 @@
                 soluction = allGrades / count;
 
             }
-        },
-
-   /* let buttons = new Vue({
-            el: '#buttons',
-            data: {
-                tablerow:
-            <td><input type="text" name="modul" ></td>
-            <td><input type="text" name="note" ></td>
-            <td><input type="text" name="ects" ></td>
-        },
-        methods: {
-        add: function() {
-            this.$data.tablerow.push(this.$refs['my-input'].value)
-        },
-    }
-    })*/
     }
 </script>
 
