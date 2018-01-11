@@ -14,14 +14,16 @@ import Noten    from './components/Noten.vue';
 import Mensa from './components/Mensa.vue';
 import toDo from './components/toDo.vue';
 import App from './App.vue';
-//import auth from './auth/authentifizierung';
+import auth from './auth/authentifizierung';
 import 'vue-event-calendar/dist/style.css'
 import vueEventCalendar from 'vue-event-calendar/dist/index.js';
 
 Vue.use(vueEventCalendar, {locale:'de'})
-//Vue.http.headers.common['Authorization'] = 'Bearer' + localStorage.getItem('id_token');
 
-//auth.checkAuth();
+auth.checkAuth();
+Vue.axios.defaults.headers.common['Authorization'] = 'Bearer' + localStorage.getItem('id_token');
+
+
 
 const routes = [
     {
@@ -33,6 +35,7 @@ const routes = [
         name:'Kalender',
         path:'/Kalender',
         component: kalender,
+
     },
     {
         name:'login',
@@ -63,14 +66,5 @@ const routes = [
 
 ];
 
-
-
-export const router = new VueRouter({ mode: 'history', routes: routes});
-
-
-/*router.redirect({
-    to:'/'
-})*/
-
-
+export const router = new VueRouter({  routes: routes});
 new Vue(Vue.util.extend({ router }, App)).$mount('#app');

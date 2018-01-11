@@ -48,6 +48,11 @@
             handleMonthChanged (data) {
                 console.log('month-changed', data)
             }
+        },
+        route: {
+            canActivate() {
+                return auth.user.authenticated
+            }
         }
     }
 </script>

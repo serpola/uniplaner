@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" />
 
     <img src="/src/pics/icons_index/kalender/kalender_64.png" alt="Kalender">
-    <router-link to="Kalender" >Kalender</router-link>
+    <router-link  to="Kalender" >Kalender</router-link>
     <br>
     <img src="/src/pics/icons_index/grades/grades_64.png" alt="Noten">
     <router-link to="Noten">Noten</router-link>

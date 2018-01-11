@@ -9,12 +9,10 @@ var mongoose    = require('mongoose');
 var jwt    = require('jsonwebtoken'); // zum erstellen und verifizieren von tockens
 var config = require('./config'); // zum getten der config datei
 var cors = require('cors');
-var http            = require('http');
 //Modele einbinden
 var User   = require('./app/models/user'); // getten der mongose datei
 var Noten  = require('./app/models/noten');
 var ToDO   = require('./app/models/todo');
-var Kalender = require('./app/models/kalender');
 
 
 
@@ -23,7 +21,7 @@ var Kalender = require('./app/models/kalender');
 // =================================================================
 var port = process.env.PORT || 8080;
 mongoose.connect(config.database); // db verbindung
-app.set('Secret', config.secret); // geheime variable
+//app.set('Secret', config.secret); // geheime variable
 app.use(cors());// damit der server CRUD annimmt
 // zum Parsen
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -65,6 +63,8 @@ app.get('/', function(req, res) {
     res.send('Hallo die API läuft auf http://localhost:' + port + '/api');
 });
 
+//geschützte routen
+app.get('/s/',app.set('Secret', config.secret))
 
 
 // ---------------------------------------------------------
@@ -81,12 +81,12 @@ apiRoutes.post('/authenticate', function(req, res) {
         if (err) throw err;
 
         if (!user) {
-            res.json({ success: false, message: 'Authentication failed. User not found.' });
+            res.status(401).json({ success: false, message: 'Authentication failed. User not found.' });
         } else if (user) {
 
             // check if password matches
             if (user.password != req.body.password) {
-                res.json({ success: false, message: 'Authentication failed. Wrong password.' });
+                res.status(401).json({ success: false, message: 'Authentication failed. Wrong password.' });
             } else {
 
                 // if user is found and password is right
@@ -97,7 +97,7 @@ apiRoutes.post('/authenticate', function(req, res) {
                 var token = jwt.sign(payload, app.get('Secret'), { expiresIn: 86400 // expires in 24 hours
                 });
 
-                res.json({
+                res.status(200).json({
                     success: true,
                     message: 'Enjoy your token!',
                     id_token: token
@@ -108,7 +108,7 @@ apiRoutes.post('/authenticate', function(req, res) {
 
     });
 });
-
+/*
 // ---------------------------------------------------------
 // route middleware to authenticate and check token
 // ---------------------------------------------------------
@@ -142,7 +142,7 @@ apiRoutes.use(function(req, res, next) {
 
     }
 
-});
+});*/
 
 // ---------------------------------------------------------
 // authenticated routes
@@ -163,10 +163,10 @@ apiRoutes.post("/users", (req, res) => {
     var myData = new User(req.body);
     myData.save()
         .then(item => {
-            res.send("item saved to database");
+            res.send("Benutzer wurde angelegt");
         })
         .catch(err => {
-            res.status(400).send("unable to save to database");
+            res.status(400).send("Benutzer konte nicht gespeichert werden");
         });
 });
 
