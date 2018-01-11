@@ -1,4 +1,4 @@
-<template xmlns:v-model="http://www.w3.org/1999/xhtml">
+<template>
 
     <div>
 
@@ -10,7 +10,7 @@
     <p id="beschreibung">Hier findest du den Mensaplan deiner Hochschule. Scroll einfach durch und such sie.</p>
 
 
-    <div id="mens" v-bind:onload="mounted">
+    <div id="mens">
 
         <div id="progress">
             <h1>
@@ -23,20 +23,20 @@
             </div>
         </div>
 
-        <!--
-        <select v-if="canteens.length" v-on:change="load" v-model="canteenId">
-            <option v-for="c in canteens" v-bind:value="c.id">{{ c.name }}</option>
-        </select>
 
-        <p v-if="meals.length == 0">
-            No meal plan.
-        </p>
-        <ul v-else>
-            <li v-for="m in meals">{{ m.name }}</li>
-        </ul>
--->
+                <select v-if="canteens.length" v-on:change="load" v-model="canteenId">
+                    <option v-for="c in canteens" v-bind:value="c.id">{{ c.name }}</option>
+                </select>
+
+                        <p v-if="meals.length == 0">
+                            No meal plan.
+                        </p>
+                        <ul v-else>
+                            <li v-for="m in meals">{{ m.name }}</li>
+                        </ul>
+
     </div>
-</div>
+    </div>
 
 </template>
 
@@ -44,35 +44,39 @@
     export default {
         name: "mensa",
 
-
-        data: {
-            progress: 0,
-            canteens: [],
-            meals: [],
-            canteenId: 0
+        data: function() {
+            return {
+                progress: 0,
+                    canteens: [],
+                meals: [],
+                canteenId: 0
+            }
         },
+
         methods: {
-            load: function() {
+            load: function () {
+
                 console.log('lade canteen ' + this.$data.canteenId)
                 this.$http.get(`//openmensa.org/api/v2/canteens/${this.$data.canteenId}/days/20171130/meals\\`)
                     .then(resp => {
-                        console.log(resp.body)
-                        this.$data.meals = resp.body
+                        console.log(resp.data)
+                        this.$data.meals = resp.data
                     })
-            },
+            }
+        },
 
-
-            mounted: function() {
-                this.$http.get(`//openmensa.org/api/v2/canteens/`)
-                    .then(resp => {
-                        console.log(resp.body)
-                        this.$data.canteens = resp.body
-                        this.$data.progress = '100%'
-                    })
-                    .catch(err => console.log(err))
-            },
-        }
+        mounted: function() {
+             this.$http.get("//openmensa.org/api/v2/canteens/")
+                .then(resp => {
+                    console.log(resp.data)
+                    this.$data.canteens = resp.data
+                    this.$data.progress = '100%'
+                })
+                .catch(err => console.log(err))
+        },
     }
+
+
 </script>
 
 <style>

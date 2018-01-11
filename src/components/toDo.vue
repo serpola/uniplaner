@@ -12,27 +12,36 @@
         </p>
         
         <div id="myDIV" class="ueberschrift">
-            <input type="text" id="myInput" placeholder="Aufgabe...">
-            <span onclick="newItem()" class="addBtn">Einfügen</span>
+            <input type="text" v-model="newTodo" id="myInput" placeholder="Aufgabe...">
+            <span v-on:click="saveAll" class="addBtn">Einfügen</span>
+            <!--<span v-on:click="saveAll" class="saveBtn">Einträge speichern</span>-->
         </div>
 
         <ul id="myUL">
+            <li v-for="t in todos">{{ t.name }}</li>
             <li>Mathe Hausarbeit</li>
             <li>WT-Projekt</li>
-            <li>Meet George</li>
         </ul>
    </div>
 </template>
 
 <script>
-    import td from '../components_js/toDo.js'
     export default {
         name: "to-do",
-data(){
+    data(){
+        return {
+            todos: [],
+            newTodo: ""
+        }
+    },
+        methods: {
 
-},
-        methods(){
-            td.newItem()
+            saveAll: function(){
+                let uri = 'http://localhost:8080/api/todo';
+                this.axios.post(uri,  this.$data.newTodo).then((response)=> {
+                    this.$data.todos.push({name: 'ToDO'})
+                })
+            }
         }
     }
 </script>
@@ -142,7 +151,7 @@ ul li:hover {
 /* Style the input */
 input {
   border: none;
-  width: 75%;
+  width: 50%;
   padding: 10px;
   float: left;
   font-size: 16px;
@@ -151,18 +160,35 @@ input {
 
 /* Style the "Add" button */
 .addBtn {
-  padding: 10px;
-  width: 25%;
-  background: #d9d9d9;
-  color: #555;
-  float: left;
-  text-align: center;
-  font-size: 16px;
-  cursor: pointer;
-  transition: 0.3s;
-}
+     padding: 10px;
+     width: 25%;
+     background: #d9d9d9;
+     color: #555;
+     float: left;
+     text-align: center;
+     font-size: 16px;
+     cursor: pointer;
+     transition: 0.3s;
+ }
 
-.addBtn:hover {
-  background-color: #bbb;
-}
+   .addBtn:hover {
+       background-color: #bbb;
+   }
+
+   /*Style Save Button*/
+   .saveBtn {
+       padding: 10px;
+       width: 25%;
+       background: #d9d9d9;
+       color: #555;
+       float: left;
+       text-align: center;
+       font-size: 16px;
+       cursor: pointer;
+       transition: 0.3s;
+   }
+
+   .saveBtn:hover {
+       background-color: #bbb;
+   }
 </style>
