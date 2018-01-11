@@ -17,11 +17,11 @@
                 </thead>
 
                 <tbody>
-                <tr v-for="row in rows">
-                    <td><input type="text" v-model="row.modul"></td>
-                    <td><input type="text" v-model="row.note"></td>
-                    <td><input type="text" v-model="row.ects"></td>
-                    <td><a @click="removeRow(row)">Remove</a></td>
+                <tr v-bind:id="'zeile' + $index" v-for="note in noten">
+                    <td><input type="text" v-model="note.modul"></td>
+                    <td><input type="text" v-model="note.note"></td>
+                    <td><input type="text" v-model="note.ects"></td>
+                    <td><a @click="removeRow(note)">Remove</a></td>
                 </tr>
                 </tbody>
             </table>
@@ -30,9 +30,9 @@
             </div>
         </div>
     <div id="buttons">
-        <button id="newEntry" v-on:click="addRow">Neuen Eintrag generieren</button><br><!--neue Tabellenzeile generieren -->
         <button id="getECTS" v-on:click="getEcts">ECTS berechnen</button><!-- Summe der ECTS berechnen-->
         <button id="getNotes" v-on:click="getGradesAverage">Notendurchschnitt berechnen</button><!--Durchschnitt der bestandenen Noten berechnen -->
+        <button id="save" v-on:click="saveAll">Speichern</button>
     </div>
     </div>
 </template>
@@ -41,48 +41,39 @@
     export default {
         name: "noten",
 
-        data: {
-            rows: [
-                {modul: "",note: "", ect: ""},
-                {modul: "",note: "", ect: ""},
-            ]
-        },
+        data() { return{
+            noten:[]
+        }},
         methods:{
             addRow: function(){
-                this.rows.push({modul: "",note: "", ect: ""},
-                );
+                this.noten.push({modul: "",note: "", ect: ""} );
             },
-            removeRow: function(row){
-                //console.log(row);
-                this.rows.$remove(row);
-            }
-        },
-            addEntry: function () {
+            removeRow: function(note){
+                //console.log(note);
+                this.rows.$remove(note);
+            },
+
+            saveAll: function () {
                 let uri = 'http://localhost:8080/api/noten';
-                this.axios.post(uri, this.user).then((response) => {
-                    this.$router.push({name: 'modul'})
+                this.axios.post(uri, this.noten).then((response) => {
+                    this.$router.push({name: 'Noten'})
                 })
-
-
             },
-
-
-
             getEcts: function(){
                 var i = 0;
                 var gesamt = 0;
                 while(1){ /* Solange es Ects gibt sollen sie zusammen gezählt werden. */
-                    // Ects = Ects an der Stelle i
-                    gesamt = gesamt; // + Ects
+                    // ects = Ects an der Stelle i
+                    gesamt = gesamt; // + ects;
                     i++;
                 }
-
+                //alert(gesamt);
             },
             getGradesAverage: function(){
                 var count;
                 var grade; //current Grade
                 var allGrades = 0;
-                var soluction;
+                var solution;
 
                 for(var j = 0; j < tablelength; j++) {
 
@@ -92,9 +83,21 @@
                     }
                 }
 
-                soluction = allGrades / count;
-
+                solution = allGrades / count;
+                //alert(solution);
             }
+
+
+
+
+        },
+
+
+
+
+
+
+
     }
 </script>
 
@@ -114,7 +117,7 @@
         font-size: 30px;
     }
     button{
-        position: relative; /* or absolute ? */
+        position: relative;
         background-color: orange;
         font-size: 16px;
         margin-top: 5px;
@@ -131,8 +134,8 @@
         margin: auto;
 
     }
-    table td{ /* wieso sind diese rahmen so komisch beschissen ? >.< */
-        border-style: solid; /*sieht zwar nicht perfekt aus aber ich lass es mal so.*/
+    table td{
+        border-style: solid;
 
     }
 

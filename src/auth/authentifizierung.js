@@ -10,24 +10,28 @@ export default {
     },
 
     login(context, creds, redirect){
-        context.axios.post(login_url, creds, (data)=>{
-            localStorage.setItem('token', data.id_token)
+        context.axios.post(login_url, creds).then((response)=>{
+            context.$router.push({name:'Start'})
+            localStorage.setItem('token', response.data.id_token)
+            console.log(response);
             this.user.authenticated = true
-            if(redirect){
-                router.go(redirect)
-            }
-        }).then((response)=>{context.$router.push({name:'Start'})})
+            /*if(redirect){
+                 router.go(redirect)
+             }*/
+        })
 
     },
 
     signup(context,creds, redirect){
-        context.axios.post(login_url, creds, (data)=>{
+        context.axios.post(login_url, creds).then((response)=>{
+            context.$router.push({name:'Start'})
             localStorage.setItem('token', data.id_token)
             this.user.authenticated = true
             if(redirect){
                 router.go(redirect)
             }
-        }).then((response)=>{context.$router.push({name:'Start'})})
+
+        })
     },
 //.then((response)=>{this.$router.push({name:'login'})})
     logout(){
