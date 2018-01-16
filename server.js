@@ -13,7 +13,7 @@ var cors = require('cors');
 var User   = require('./app/models/user'); // getten der mongose datei
 var Noten  = require('./app/models/noten');
 var ToDO   = require('./app/models/todo');
-
+var Events = require('./app/models/events');
 
 
 // =================================================================
@@ -21,7 +21,7 @@ var ToDO   = require('./app/models/todo');
 // =================================================================
 var port = process.env.PORT || 8080;
 mongoose.connect(config.database); // db verbindung
-//app.set('Secret', config.secret); // geheime variable
+app.set('Secret', config.secret); // geheime variable
 app.use(cors());// damit der server CRUD annimmt
 // zum Parsen
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -57,15 +57,6 @@ app.get('/setup', function(req, res) {
 // get an instance of the router for api routes
 // ---------------------------------------------------------
 var apiRoutes = express.Router();
-
-// standart route (http://localhost:8080)
-app.get('/', function(req, res) {
-    res.send('Hallo die API läuft auf http://localhost:' + port + '/api');
-});
-
-//geschützte routen
-app.get('/s/',app.set('Secret', config.secret))
-
 
 // ---------------------------------------------------------
 // authentication (no middleware necessary since this isnt authenticated)
@@ -108,41 +99,6 @@ apiRoutes.post('/authenticate', function(req, res) {
 
     });
 });
-/*
-// ---------------------------------------------------------
-// route middleware to authenticate and check token
-// ---------------------------------------------------------
-apiRoutes.use(function(req, res, next) {
-
-    // check header or url parameters or post parameters for token
-    var token = req.body.token || req.param('token') || req.headers['x-access-token'];
-
-    // decode token
-    if (token) {
-
-        // verifies secret and checks exp
-        jwt.verify(token, app.get('Secret'), function(err, decoded) {
-            if (err) {
-                return res.json({ success: false, message: 'Failed to authenticate token.' });
-            } else {
-                // if everything is good, save to request for use in other routes
-                req.decoded = decoded;
-                next();
-            }
-        });
-
-    } else {
-
-        // if there is no token
-        // return an error
-        return res.status(403).send({
-            success: false,
-            message: 'No token provided.'
-        });
-
-    }
-
-});*/
 
 // ---------------------------------------------------------
 // authenticated routes
@@ -169,6 +125,24 @@ apiRoutes.post("/users", (req, res) => {
             res.status(400).send("Benutzer konte nicht gespeichert werden");
         });
 });
+
+//Crud Events
+
+apiRoutes.get('/events', function (req, res) {
+    Events.find({},function (err, events) {
+        res.json(events);
+    })
+});
+
+apiRoutes.post('/events',(req, res)=>{
+    var myEvents = new Events(req.body);
+    myEvents.save()
+        .then(item=>{res.send("Event ist angelegt");
+        })
+        .catch(err=>{
+            res.status(400).send('Event konnte nicht gespeichert werden');
+        })
+})
 
 //CRUD Noten
 apiRoutes.get('/noten', function (req, res){
@@ -210,6 +184,8 @@ apiRoutes.put('/todo', function (req, res) {
     ToDO.updateOne({},)
 
 })
+
+
 
 apiRoutes.get('/check', function(req, res) {
     res.json(req.decoded);

@@ -10,49 +10,86 @@
         </header>
         </div>
 <div>
-    <vue-event-calendar
-            :events="demoEvents"
-            @day-changed="handleDayChanged"
-            @month-changed="handleMonthChanged"
-    ></vue-event-calendar>
+    <vue-event-calendar >
+        <template scope="props">
+            <div v-if="loading" v-on:change="loadEvents" v-model="events">
+             <!--  <div v-for="(event, index) in events" v-on:change="loadEvents"class="event-item">-->
+           <div v-for="event in events" class="event-item" v-on:change="loadEvents">
+                <!-- In here do whatever you want, make you owner event template -->
+                {{event.title}} {{event.date}} {{event.beschr}}
+            </div>
+            </div>
+        </template>
+
+
+    </vue-event-calendar>
 
 
 </div>
+        <br>
+        <div>
+            <form v-on:submit.prevent="addEvent">
+            <input type="date" v-model="events.date">
+            <input type="text" placeholder="Titel" v-model="events.title">
+            <input type="text" placeholder="Beschreibung" v-model="events.beschr">
+                <button class="btn btn-lg btn-warning">Speichern</button>
+            </form>
+        </div>
 </div>
 </template>
 
 <script>
-    let today = new Date()
+    import auth from '../auth/authentifizierung'
     export default {
         name: 'kalender',
         data () {
             return {
-                demoEvents: [{
-                    date: `${today.getFullYear()}/${today.getMonth() + 1}/15`,
-                    title: 'Title-1',
-                    desc: 'longlonglong description'
-                },{
-                    date: `${today.getFullYear()}/${today.getMonth() + 1}/24`,
-                    title: 'Title-2'
-                },{
-                    date: `${today.getFullYear()}/${today.getMonth() === 11 ? 1 : today.getMonth() + 2}/06`,
-                    title: 'Title-3',
-                    desc: 'description'
-                }]
+                loading: true,
+                events:{}
             }
         },
+        ready: function () {
+            this.loading = true;
+            let uri = 'http://localhost:8080/api/events'
+            this.axios.get(uri)
+                .then(resp=>{
+                    this.$data.events = resp.data
+
+                })
+            
+        }
+        /*created () {
+            this.loadEvents()
+        },*/
         methods: {
-            handleDayChanged (data) {
-                console.log('date-changed', data)
+
+            addEvent: function () {
+                this.loading = false;
+                let uri = 'http://localhost:8080/api/events';
+                this.axios.post(uri, this.events).then((response)=> {
+                    this.$router.push({name:'Kalender'})
+                    this.loading =true;
+                })
             },
-            handleMonthChanged (data) {
-                console.log('month-changed', data)
+            loadEvents: function () {
+                this.loading = true;
+                let uri = 'http://localhost:8080/api/events'
+                this.axios.get(uri)
+                    .then(resp=>{
+                        this.$data.events = resp.data
+
+                    })
+
             }
         },
+        /*created: function () {
+            let uri = 'http://localhost:8080/api/events'
+            this.axios.get(uri)
+                .then(resp=>{
+                    this.$data.events = resp.data
+                })
+        },*/
         route: {
-            canActivate() {
-                return auth.user.authenticated
-            }
         }
     }
 </script>

@@ -44,19 +44,6 @@
 
                 auth.login(this,user,'secret')
 
-               /* let uri = 'http://localhost:8080/api/authenticate';
-                this.axios.post(uri, this.user).then((response) => {
-                    localStorage.setItem('token', user.id_token)
-                    this.user.authenticated = true
-                    if(redirect){
-                        router.go(redirect)
-                    }
-                    this.$router.push({name: 'login'})
-                }).error( (err) =>{
-                    this.error= err
-                })*/
-
-
             }
         }
     }

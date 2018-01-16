@@ -26,7 +26,7 @@
         </div>
         <div>
         <button class="btn btn-lg btn-warning btn-block">Registrieren</button>
-    </div> <!-- /container -->
+    </div>
     </form>
 </div>
 </template>

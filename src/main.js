@@ -29,12 +29,30 @@ const routes = [
     {
     name:'Start',
     path:'/start',
-    component: Start
+    component: Start,
+        beforeEnter: (to, from, next) => {
+            // console.log('is logged in: ', auth.user.authenticated)
+            if(!auth.user.authenticated){
+                next('/')
+            }
+            else {
+                next()
+            }
+        }
 },
     {
         name:'Kalender',
         path:'/Kalender',
         component: kalender,
+        beforeEnter: (to, from, next) => {
+           // console.log('is logged in: ', auth.user.authenticated)
+            if(!auth.user.authenticated){
+                next('/')
+            }
+            else {
+                next()
+            }
+        }
 
     },
     {
@@ -46,16 +64,43 @@ const routes = [
         name:'noten',
         path:'/noten',
         component: Noten,
+        beforeEnter: (to, from, next) => {
+            // console.log('is logged in: ', auth.user.authenticated)
+            if(!auth.user.authenticated){
+                next('/')
+            }
+            else {
+                next()
+            }
+        }
     },
     {
         name:'mensa',
         path:'/mensa',
         component: Mensa,
+        beforeEnter: (to, from, next) => {
+            // console.log('is logged in: ', auth.user.authenticated)
+            if(!auth.user.authenticated){
+                next('/')
+            }
+            else {
+                next()
+            }
+        }
     },
     {
         name:'toDo',
         path:'/todo',
         component: toDo,
+        beforeEnter: (to, from, next) => {
+            // console.log('is logged in: ', auth.user.authenticated)
+            if(!auth.user.authenticated){
+                next('/')
+            }
+            else {
+                next()
+            }
+        }
     },
     {
         name:'register',
