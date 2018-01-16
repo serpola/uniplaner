@@ -17,7 +17,7 @@
                 </thead>
 
                 <tbody>
-                <tr v-bind:id="'zeile' + $index" v-for="note in noten">
+                <tr v-bind:id="note.modul" v-for="note in noten">
                     <td><input type="text" v-model="note.modul"></td>
                     <td><input type="text" v-model="note.note"></td>
                     <td><input type="text" v-model="note.ects"></td>
@@ -50,7 +50,7 @@
             },
             removeRow: function(note){
                 //console.log(note);
-                this.rows.$remove(note);
+                this.noten.$remove(note);
             },
 
             saveAll: function () {
