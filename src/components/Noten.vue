@@ -50,7 +50,7 @@
             },
             removeRow: function(note){
                 //console.log(note);
-                this.noten.$remove(note);
+                this.$data.noten.splice(this.$data.indexOf(this.$data.note),1);
             },
 
             saveAll: function () {
@@ -58,6 +58,9 @@
                 this.axios.post(uri, this.$data.noten).then((response) => {
                     this.$router.push({name: 'Noten'})
                 })
+            },
+            getMethod: function(){
+                this.axios.get()
             },
             getEcts: function(){
                 var i = 0;
