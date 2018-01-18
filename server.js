@@ -6,7 +6,8 @@ var app         = express();
 var bodyParser  = require('body-parser');
 var morgan      = require('morgan');
 var mongoose    = require('mongoose');
-var jwt    = require('jsonwebtoken'); // zum erstellen und verifizieren von tockens
+var jwt    = require('express-jwt'); // zum erstellen und verifizieren von tockens
+var jwt2 = require('jsonwebtoken');
 var config = require('./config'); // zum getten der config datei
 var cors = require('cors');
 //Modele einbinden
@@ -85,7 +86,7 @@ apiRoutes.post('/authenticate', function(req, res) {
                 var payload = {
                     admin: user.admin
                 }
-                var token = jwt.sign(payload, app.get('Secret'), { expiresIn: 86400 // expires in 24 hours
+                var token = jwt2.sign(payload, config.secret, { expiresIn: 86400 // expires in 24 hours
                 });
 
                 res.status(200).json({
@@ -99,6 +100,45 @@ apiRoutes.post('/authenticate', function(req, res) {
 
     });
 });
+
+
+
+
+// ---------------------------------------------------------
+// route middleware to authenticate and check token
+// ---------------------------------------------------------
+/*apiRoutes.use(function(req, res, next) {
+
+    // check header or url parameters or post parameters for token
+    var token = req.body.token || req.param('token') || req.headers['x-access-token'];
+
+    // decode token
+    if (token) {
+
+        // verifies secret and checks exp
+        jwt.verify(token, app.get('Secret'), function(err, decoded) {
+            if (err) {
+                return res.json({ success: false, message: 'Failed to authenticate token.' });
+            } else {
+                // if everything is good, save to request for use in other routes
+                req.decoded = decoded;
+                next();
+            }
+        });
+
+    } else {
+
+        // if there is no token
+        // return an error
+        return res.status(403).send({
+            success: false,
+            message: 'No token provided.'
+        });
+
+    }
+
+});*/
+apiRoutes.use(jwt({ secret: config.secret}).unless({path: ['/authorization']}));
 
 // ---------------------------------------------------------
 // authenticated routes

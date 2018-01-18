@@ -21,7 +21,7 @@ import vueEventCalendar from 'vue-event-calendar/dist/index.js';
 Vue.use(vueEventCalendar, {locale:'de'})
 
 auth.checkAuth();
-Vue.axios.defaults.headers.common['Authorization'] = 'Bearer' + localStorage.getItem('id_token');
+Vue.axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
 
 
 
