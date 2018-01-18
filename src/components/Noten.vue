@@ -20,13 +20,13 @@
                 <tr v-bind:id="note.modul" v-for="note in noten">
                     <td><input type="text" v-model="note.modul"></td>
                     <td><input type="text" v-model="note.note"></td>
-                    <td><input type="text" v-model="note.ects"></td>
+                    <td><input type="text" v-model="note.ect"></td>
                     <td><a @click="removeRow(note)">Remove</a></td>
                 </tr>
                 </tbody>
             </table>
             <div>
-                <button class="button btn-primary" @click="addRow">Add row</button>
+                <button class="button btn-primary" @click="addRow">Zeile hinzufügen</button>
             </div>
         </div>
     <div id="buttons">
@@ -55,7 +55,7 @@
 
             saveAll: function () {
                 let uri = 'http://localhost:8080/api/noten';
-                this.axios.post(uri, this.noten).then((response) => {
+                this.axios.post(uri, this.$data.noten).then((response) => {
                     this.$router.push({name: 'Noten'})
                 })
             },
@@ -67,7 +67,7 @@
                     gesamt = gesamt; // + ects;
                     i++;
                 }
-                //alert(gesamt);
+                //console.log(gesamt);
             },
             getGradesAverage: function(){
                 var count;
@@ -75,7 +75,7 @@
                 var allGrades = 0;
                 var solution;
 
-                for(var j = 0; j < tablelength; j++) {
+                for(var j = 0; j < noten.length(); j++) {
 
                     if (grade != NULL) {
                         allGrades = allGrades + grade;
@@ -84,7 +84,7 @@
                 }
 
                 solution = allGrades / count;
-                //alert(solution);
+                //console.log(solution);
             }
 
 
