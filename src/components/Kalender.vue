@@ -48,7 +48,7 @@
                 events:{}
             }
         },
-        ready: function () {
+       /* ready: function () {
             this.loading = true;
             let uri = 'http://localhost:8080/api/events'
             this.axios.get(uri)
