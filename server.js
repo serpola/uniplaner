@@ -152,8 +152,12 @@ apiRoutes.get('/noten', function (req, res){
     });
 });
 apiRoutes.post('/noten', function (req, res) {
-    var daten = new Noten(req.body);
-    daten.save()
+    var savePromises = [];
+    req.body.forEach(function(note) {
+        var daten = new Noten(note); // todo in note umbennen
+        savePromises.push(daten.save())
+    });
+    Promise.all(savePromises)
         .then(item =>{
             res.send('Noten wurden auf die DB gespeichert');
         })
