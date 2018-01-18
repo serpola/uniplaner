@@ -8,20 +8,21 @@
     <p id="todo">Deine To-Do Liste</p>
     
         <p id="beschreibung">
-            Du hast vergessen die Hausarbeit in Mathe zu machen oder dein Referat? Kein Problem! Mit diesem Tool kannst du deine Erledigungen eintragen und sie abhacken, wenn sie erledigt sind.
+            Du hast vergessen die Hausarbeit in Mathe zu machen oder dein Referat? Kein Problem! Mit diesem Tool kannst du deine Erledigungen eintragen und sie löschen, wenn sie erledigt sind.
         </p>
         
         <div id="myDIV" class="ueberschrift">
             <input type="text" v-model="newTodo" id="myInput" placeholder="Aufgabe...">
+
             <span v-on:click="saveAll" class="addBtn">Einfügen</span>
         </div>
 
         <ul id="myUL">
-            <li v-for="t in todos">{{ t.name }}
-                <button v-on:click="removeElement(key)">remove</button>
+            <li v-for="t in todos">
+                {{ t.aufgabe }}
+                <button v-on:click="removeElement">remove</button>
             </li>
-            <li>Mathe Hausarbeit</li>
-            <li>WT-Projekt</li>
+
         </ul>
 
    </div>
@@ -38,6 +39,11 @@
     },
         methods: {
 
+            removeElement: function() {
+                this.$data.todos.splice(this.$data.todos.indexOf(this.$data.newTodo),1);
+                /*delete request serdar muss eine api machen */
+            },
+
             saveAll: function () {
                 let uri = 'http://localhost:8080/api/todo';
                 this.axios.post(uri, {
@@ -47,12 +53,27 @@
                         name: this.$data.newTodo
                     })
                 })
-            }
+            },
+
+            getAll: function () {
+                let uri = 'http://localhost:8080/api/todo';
+                this.axios.get(uri).then((response)=>{
+                    this.$data.todos = response.data
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            },
         },
 
-           removeElement : function(){
-                this.$data.todos.splice(this.$data.indexOf(this.$data.newTodo),1);
-           }
+        mounted: function () {
+            let uri = 'http://localhost:8080/api/todo';
+            this.axios.get(uri).then((response)=>{
+                this.$data.todos = response.data
+            }).catch(function (error) {
+                console.log(error);
+            });
+
+        }
 
     }
 </script>
