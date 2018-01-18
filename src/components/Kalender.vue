@@ -15,7 +15,6 @@
             <div v-if="loading" v-on:change="loadEvents" v-model="events">
              <!--  <div v-for="(event, index) in events" v-on:change="loadEvents"class="event-item">-->
            <div v-for="event in events" class="event-item" v-on:change="loadEvents">
-                <!-- In here do whatever you want, make you owner event template -->
                 {{event.title}} {{event.date}} {{event.beschr}}
             </div>
             </div>
@@ -45,19 +44,9 @@
         data () {
             return {
                 loading: true,
-                events:{}
+                events:[]
             }
         },
-       /* ready: function () {
-            this.loading = true;
-            let uri = 'http://localhost:8080/api/events'
-            this.axios.get(uri)
-                .then(resp=>{
-                    this.$data.events = resp.data
-
-                })
-            
-        }
         /*created () {
             this.loadEvents()
         },*/
@@ -82,13 +71,13 @@
 
             }
         },
-        /*created: function () {
+        mounted: function () {
             let uri = 'http://localhost:8080/api/events'
             this.axios.get(uri)
                 .then(resp=>{
                     this.$data.events = resp.data
                 })
-        },*/
+        },
         route: {
         }
     }

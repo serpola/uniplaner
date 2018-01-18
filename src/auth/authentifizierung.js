@@ -40,7 +40,7 @@ export default {
     },
 
     checkAuth(){
-        var jwt = localStorage.getItem('id_token')
+        var jwt = localStorage.getItem('token')
         if(jwt){
             this.user.authenticated=true
         }else{
