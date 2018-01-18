@@ -12,9 +12,8 @@
 <div>
     <vue-event-calendar >
         <template scope="props">
-            <div v-if="loading" v-on:change="loadEvents" v-model="events">
-             <!--  <div v-for="(event, index) in events" v-on:change="loadEvents"class="event-item">-->
-           <div v-for="event in events" class="event-item" v-on:change="loadEvents">
+            <div>
+           <div v-for="event in events" class="event-item">
                 {{event.title}} {{event.date}} {{event.beschr}}
             </div>
             </div>
@@ -27,7 +26,7 @@
 </div>
         <br>
         <div>
-            <form v-on:submit.prevent="addEvent">
+            <form v-on:submit="addEvent">
             <input type="date" v-model="events.date">
             <input type="text" placeholder="Titel" v-model="events.title">
             <input type="text" placeholder="Beschreibung" v-model="events.beschr">
@@ -44,20 +43,22 @@
         data () {
             return {
                 loading: true,
-                events:[]
+                events:{
+
+                }
             }
         },
-        /*created () {
-            this.loadEvents()
-        },*/
         methods: {
-
             addEvent: function () {
                 this.loading = false;
                 let uri = 'http://localhost:8080/api/events';
-                this.axios.post(uri, this.events).then((response)=> {
-                    this.$router.push({name:'Kalender'})
+                this.axios.post(uri,{
+                    date: this.$data.events.date,
+                    title:this.$data.events.title,
+                    beschr:this.$data.events.beschr,}
+            ).then((response)=> {
                     this.loading =true;
+                    location.reload();
                 })
             },
             loadEvents: function () {
@@ -66,9 +67,7 @@
                 this.axios.get(uri)
                     .then(resp=>{
                         this.$data.events = resp.data
-
                     })
-
             }
         },
         mounted: function () {
