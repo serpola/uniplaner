@@ -18,7 +18,7 @@
 
         <ul id="myUL">
             <li v-for="t in todos">{{ t.name }}
-                <!--button v-on:click="removeElement(key)">remove</button>-->
+                <button v-on:click="removeElement(key)">remove</button>
             </li>
             <li>Mathe Hausarbeit</li>
             <li>WT-Projekt</li>
@@ -42,19 +42,17 @@
                 let uri = 'http://localhost:8080/api/todo';
                 this.axios.post(uri, {
                     aufgabe: this.$data.newTodo,
-                    datum: "",
-                    erledigt: false
                 }).then((response) => {
                     this.$data.todos.push({
                         name: this.$data.newTodo
                     })
                 })
             }
-        }
+        },
 
-           /*removeElement : function(index){
-                this.todos.$remove(index);
-           }*/
+           removeElement : function(){
+                this.$data.todos.splice(this.$data.indexOf(this.$data.newTodo),1);
+           }
 
     }
 </script>
@@ -129,19 +127,6 @@ ul li:nth-child(odd) {
 /* Darker background-color on hover */
 ul li:hover {
   background: #ddd;
-}
-
-/* Style the close button */
-.close {
-  position: absolute;
-  right: 0;
-  top: 0;
-  padding: 12px 16px 12px 16px;
-}
-
-.close:hover {
-  background-color: #f44336;
-  color: white;
 }
 
 /* Style the header */
