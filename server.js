@@ -165,6 +165,7 @@ apiRoutes.post('/noten', function (req, res) {
             res.send('Noten wurden auf die DB gespeichert');
         })
         .catch(err=>{
+            console.log(err);
             res.status(400).send('Konnte nicht auf der DB gespeichert werden');
         });
 });
