@@ -21,7 +21,7 @@
                     <td><input type="text" v-model="note.modul"></td>
                     <td><input type="text" v-model="note.note"></td>
                     <td><input type="text" v-model="note.ect"></td>
-                    <td><a @click="removeRow(note)">Remove</a></td>
+                    <td><a @click="removeRow()">Remove</a></td>
                 </tr>
                 </tbody>
             </table>
@@ -48,55 +48,66 @@
             addRow: function(){
                 this.noten.push({modul: "",note: "", ect: ""} );
             },
-            removeRow: function(note){
-                //console.log(note);
-                this.noten.$remove(note);
+            removeRow: function(){
+                this.$data.noten.splice(this.$data.noten.indexOf(this.$data.note),1);
             },
 
             saveAll: function () {
                 let uri = 'http://localhost:8080/api/noten';
+                //filter alle raus die _id haben.!!!!!
+
                 this.axios.post(uri, this.$data.noten).then((response) => {
                     this.$router.push({name: 'Noten'})
                 })
             },
             getEcts: function(){
-                var i = 0;
+                var ects = 0;
                 var gesamt = 0;
-                while(1){ /* Solange es Ects gibt sollen sie zusammen gezählt werden. */
-                    // ects = Ects an der Stelle i
-                    gesamt = gesamt; // + ects;
-                    i++;
-                }
+                for(var  j= 0; j < noten.length(); j++) {
+                    ects = noten[j].ect;
+                    if(ects != null){
+                        if(parseInt(ects) != NaN){
+                    gesamt = gesamt+ ects;
+                        }else{
+                            parseFloat(ects);
+                            gesamt = gesamt+ ects;
+                        }
+                }}
                 //console.log(gesamt);
             },
             getGradesAverage: function(){
                 var count;
-                var grade; //current Grade
+                 //current Grade
                 var allGrades = 0;
                 var solution;
 
                 for(var j = 0; j < noten.length(); j++) {
-
-                    if (grade != NULL) {
-                        allGrades = allGrades + grade;
+                    var grade = noten[j];
+                    if (grade.note != null) {
+                        if(parseInt(grade.note) != NaN){
+                        allGrades = allGrades + grade.note;
                         count++;
-                    }
+                    }else{
+                            parseFloat(grade.note);
+                            allGrades = allGrades + grade.note;
+                            count++;
+                    }}
                 }
-
                 solution = allGrades / count;
                 //console.log(solution);
-            }
-
-
+            },
+            getMethod: function(){
+                let uri='http://localhost:8080/api/noten';
+                this.axios.get(uri).then((response) =>{
+                    this.$data.noten = response.data
+                })
+            },
 
 
         },
-
-
-
-
-
-
+        mounted: function(){
+            this.getMethod();
+        }
 
     }
 </script>
