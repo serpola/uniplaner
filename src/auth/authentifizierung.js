@@ -35,7 +35,7 @@ export default {
     },
 //.then((response)=>{this.$router.push({name:'login'})})
     logout(){
-        localStorage.removeItem('id_token')
+        localStorage.removeItem('token')
         this.user.authenticated=false
     },
 

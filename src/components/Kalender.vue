@@ -5,7 +5,6 @@
         <header>
             <div>
                 <p>Uni-Planer</p>
-
             </div>
         </header>
         </div>
@@ -14,7 +13,8 @@
         <template scope="props">
             <div>
            <div v-for="event in events" class="event-item">
-                {{event.title}} {{event.date}} {{event.beschr}}
+
+                {{event.title}} {{event.date}} {{event.beschr}} <button v-on:click="removeEvent(event._id)">x</button>
             </div>
             </div>
         </template>
@@ -27,9 +27,9 @@
         <br>
         <div>
             <form v-on:submit="addEvent">
-            <input type="date" v-model="events.date">
-            <input type="text" placeholder="Titel" v-model="events.title">
-            <input type="text" placeholder="Beschreibung" v-model="events.beschr">
+            <input type="date" v-model="newEvent.date">
+            <input type="text" placeholder="Titel" v-model="newEvent.title">
+            <input type="text" placeholder="Beschreibung" v-model="newEvent.beschr">
                 <button class="btn btn-lg btn-warning">Speichern</button>
             </form>
         </div>
@@ -43,9 +43,9 @@
         data () {
             return {
                 loading: true,
-                events:{
+                events:[],
+                newEvent:{},
 
-                }
             }
         },
         methods: {
@@ -53,12 +53,13 @@
                 this.loading = false;
                 let uri = 'http://localhost:8080/api/events';
                 this.axios.post(uri,{
-                    date: this.$data.events.date,
-                    title:this.$data.events.title,
-                    beschr:this.$data.events.beschr,}
-            ).then((response)=> {
+                    date: this.$data.newEvent.date,
+                    title:this.$data.newEvent.title,
+                    beschr:this.$data.newEvent.beschr,}
+                ).then((response)=> {
                     this.loading =true;
-                    location.reload();
+                    //location.reload();
+                    this.$data.events.push(this.$data.newEvent);
                 })
             },
             loadEvents: function () {
@@ -67,8 +68,14 @@
                 this.axios.get(uri)
                     .then(resp=>{
                         this.$data.events = resp.data
+                        console.log(this.$data.events);
                     })
-            }
+            },
+
+        },
+        removeEvent: function (event_id) {
+            let uri = 'http://localhost:8080/api/events'
+            this.axios.delete(uri, event_id)
         },
         mounted: function () {
             let uri = 'http://localhost:8080/api/events'

@@ -146,6 +146,10 @@ apiRoutes.post('/events',(req, res)=>{
             res.status(400).send('Event konnte nicht gespeichert werden');
         })
 })
+/*
+apiRoutes.delete('/events',(req, res)=>{
+    Events.findByIdAndRemove(req.params.EventsId)
+})*/
 
 //CRUD Noten
 apiRoutes.get('/noten', function (req, res){

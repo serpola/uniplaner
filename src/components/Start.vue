@@ -3,7 +3,7 @@
     <header>
         <div>
         <p>Uni-Planer</p>
-        <router-link to="/" id="lgn" >Abmelden</router-link>
+            <a href="http://localhost:3000" id="lgn" v-on:click="lgout">Abmelden</a>
        </div>
     </header>
 
@@ -36,7 +36,14 @@
 </template>
 
 <script>
-
+    import auth from '../auth/authentifizierung'
+    export default {
+        methods:{
+            lgout(){
+                auth.logout()
+            }
+        }
+    }
 
 </script>
 
