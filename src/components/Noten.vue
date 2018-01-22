@@ -61,17 +61,18 @@
                 })
             },
             getEcts: function(){
-                var i = 0;
+                var ects = 0;
                 var gesamt = 0;
-                //for(I,SFKDFdvdf) {
-                  //  var note = noten[i];
-                    //note.note
-                //}
-                while(1){ /* Solange es Ects gibt sollen sie zusammen gezählt werden. */
-                    // ects = Ects an der Stelle i
-                    gesamt = gesamt; // + ects;
-                    i++;
-                }
+                for(var  j= 0; j < noten.length(); j++) {
+                    ects = noten[j].ect;
+                    if(ects != null){
+                        if(parseInt(ects) != NaN){
+                    gesamt = gesamt+ ects;
+                        }else{
+                            parseFloat(ects);
+                            gesamt = gesamt+ ects;
+                        }
+                }}
                 //console.log(gesamt);
             },
             getGradesAverage: function(){
@@ -81,13 +82,17 @@
                 var solution;
 
                 for(var j = 0; j < noten.length(); j++) {
-                    var grade = [j];
-                    if (grade.note != NULL) {
+                    var grade = noten[j];
+                    if (grade.note != null) {
+                        if(parseInt(grade.note) != NaN){
                         allGrades = allGrades + grade.note;
                         count++;
-                    }
+                    }else{
+                            parseFloat(grade.note);
+                            allGrades = allGrades + grade.note;
+                            count++;
+                    }}
                 }
-
                 solution = allGrades / count;
                 //console.log(solution);
             },
