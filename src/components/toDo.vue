@@ -49,11 +49,10 @@
             },*/
 
             removeElement: function(todos, id) {
-                let uri = 'http://localhost:8080/api/todo'
                 /*this.$data.todos.splice(this.$data.todos.indexOf(this.$data.newTodo),1);
                 this.axios.delete(uri, indexOf(this.$data.newTodo))
                 */
-                this.axios.delete(uri + id)
+                this.axios.delete('http://localhost:8080/api/todo' + id)
                     .then(response => this.todos.splice(this.$data.todos.indexOf(this.$data.newTodo), 1));
 
                 /*window.location.reload();*/
