@@ -14,12 +14,12 @@
                     <td><strong>ECT</strong></td>
                     <td></td>
                 </tr>
-                <tr>
+                <!--<tr>
                     <td>Summe</td>
                     <td>getGradesAverage()</td>
                     <td>getEcts()</td>
                     <td></td>
-                </tr>
+                </tr> -->
                 </thead>
 
                 <tbody>
@@ -59,10 +59,9 @@
             },
             removeRow: function(){
                 this.$data.noten.splice(this.$data.noten.indexOf(this.$data.note),1);
-                //let uri = 'http://localhost:8080/api/noten'
-                //this.axios.delete(uri)
+                let uri = 'http://localhost:8080/api/noten'
+                this.axios.delete(uri,{"_id":this.$data.note})
             },
-
             saveAll: function () {
                 let uri = 'http://localhost:8080/api/noten';
                 //filter alle raus die _id haben.!!!!!
@@ -71,55 +70,16 @@
                     this.$router.push({name: 'Noten'})
                 })
             },
-            getEcts: function(){
-                var ects = 0;
-                var gesamt = 0;
-                for(var  j= 0; j < noten.length(); j++) {
-                    ects = noten[j].ect;
-                    if(ects != null){
-                        if(parseInt(ects) != NaN){
-                    gesamt = gesamt+ ects;
-                        }else{
-                            parseFloat(ects);
-                            gesamt = gesamt+ ects;
-                        }
-                }}
-                document.write(gesamt);
-            },
-            getGradesAverage: function(){
-                var count;
-                 //current Grade
-                var allGrades = 0;
-                var solution;
-
-                for(var j = 0; j < noten.length(); j++) {
-                    var grade = noten[j];
-                    if (grade.note != null) {
-                        if(parseInt(grade.note) != NaN){
-                        allGrades = allGrades + grade.note;
-                        count++;
-                    }else{
-                            parseFloat(grade.note);
-                            allGrades = allGrades + grade.note;
-                            count++;
-                    }}
-                }
-                solution = allGrades / count;
-                document.write(solution);
-            },
             getMethod: function(){
                 let uri='http://localhost:8080/api/noten';
                 this.axios.get(uri).then((response) =>{
                     this.$data.noten = response.data
                 })
             },
-
-
         },
         mounted: function(){
             this.getMethod();
         }
-
     }
 </script>
 
