@@ -185,7 +185,7 @@ apiRoutes.get('/todo', function (req, res) {
 apiRoutes.post('/todo', function (req, res) {
     var daten = new ToDO(req.body);
     daten.save()
-        .then(item =>{res.send('Noten wurden auf die DB gespeichert');})
+        .then(item =>{res.send('To-Do´s wurden auf die DB gespeichert');})
         .catch(err=>{res.status(400).send('Konnte nicht auf der DB gespeichert werden')
         });
 
@@ -195,14 +195,11 @@ apiRoutes.post('/todo', function (req, res) {
 apiRoutes.put('/todo', function (req, res) {
     ToDO.updateOne({},)
 
-})
-
-
+});
 
 apiRoutes.get('/check', function(req, res) {
     res.json(req.decoded);
 });
-
 
 app.use('/api', apiRoutes);
 
