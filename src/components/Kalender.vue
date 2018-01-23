@@ -11,10 +11,11 @@
 <div>
     <vue-event-calendar >
         <template scope="props">
-            <div>
-           <div v-for="event in events" class="event-item">
+                <div>
+           <div v-bind:id="event._id" v-for="event in events" class="event-item">
 
                 {{event.title}} {{event.date}} {{event.beschr}} <button v-on:click="removeEvent(event._id)">x</button>
+
             </div>
             </div>
         </template>
@@ -58,8 +59,8 @@
                     beschr:this.$data.newEvent.beschr,}
                 ).then((response)=> {
                     this.loading =true;
-                    //location.reload();
                     this.$data.events.push(this.$data.newEvent);
+                    console.log(this.$data.events);
                 })
             },
             loadEvents: function () {
@@ -71,12 +72,18 @@
                         console.log(this.$data.events);
                     })
             },
+            removeEvent: function (event_id) {
+                let uri = 'http://localhost:8080/api/events/'
+                this.axios.delete(uri, { params: {_id: event_id}})
+                    .then((response)=>{
+                        this.events.splice(this.$data.events.indexOf(this.$data.event),1);
+                        console.log(this.$data.events);
+
+                    })
+            }
 
         },
-        removeEvent: function (event_id) {
-            let uri = 'http://localhost:8080/api/events'
-            this.axios.delete(uri, event_id)
-        },
+
         mounted: function () {
             let uri = 'http://localhost:8080/api/events'
             this.axios.get(uri)
