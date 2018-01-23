@@ -14,6 +14,12 @@
                     <td><strong>ECT</strong></td>
                     <td></td>
                 </tr>
+                <tr>
+                    <td>Summe</td>
+                    <td>getGradesAverage()</td>
+                    <td>getEcts()</td>
+                    <td></td>
+                </tr>
                 </thead>
 
                 <tbody>
@@ -30,9 +36,12 @@
             </div>
         </div>
     <div id="buttons">
-        <button id="getECTS" v-on:click="getEcts">ECTS berechnen</button><!-- Summe der ECTS berechnen-->
-        <button id="getNotes" v-on:click="getGradesAverage">Notendurchschnitt berechnen</button><!--Durchschnitt der bestandenen Noten berechnen -->
+        <!--<button id="getECTS" v-on:click="getEcts">ECTS berechnen</button> Summe der ECTS berechnen-->
+        <!--<button id="getNotes" v-on:click="getGradesAverage">Notendurchschnitt berechnen</button>Durchschnitt der bestandenen Noten berechnen -->
         <button id="save" v-on:click="saveAll">Speichern</button>
+    </div>
+    <div>
+
     </div>
     </div>
 </template>
@@ -50,6 +59,8 @@
             },
             removeRow: function(){
                 this.$data.noten.splice(this.$data.noten.indexOf(this.$data.note),1);
+                //let uri = 'http://localhost:8080/api/noten'
+                //this.axios.delete(uri)
             },
 
             saveAll: function () {
@@ -73,7 +84,7 @@
                             gesamt = gesamt+ ects;
                         }
                 }}
-                //console.log(gesamt);
+                document.write(gesamt);
             },
             getGradesAverage: function(){
                 var count;
@@ -94,7 +105,7 @@
                     }}
                 }
                 solution = allGrades / count;
-                //console.log(solution);
+                document.write(solution);
             },
             getMethod: function(){
                 let uri='http://localhost:8080/api/noten';
