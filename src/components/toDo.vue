@@ -20,7 +20,7 @@
         <ul id="myUL">
             <li v-for="t in todos">
                 {{ t.aufgabe }}
-                <button v-on:click="removeElement">remove</button>
+                <button v-on:click="removeElement(newTodo, newTodo._id)">remove</button>
             </li>
 
         </ul>
@@ -39,9 +39,23 @@
     },
         methods: {
 
-            removeElement: function() {
-                this.$data.todos.splice(this.$data.todos.indexOf(this.$data.newTodo),1);
-                /*delete request serdar muss eine api machen */
+            /*fetchData: function(){
+                let uri
+                this.axios.get("http://localhost:8080/api/todo").subscribe(
+                  (response) => {
+                      this.todos = response.json();
+                  }
+              )
+            },*/
+
+            removeElement: function(todos, id) {
+                /*this.$data.todos.splice(this.$data.todos.indexOf(this.$data.newTodo),1);
+                this.axios.delete(uri, indexOf(this.$data.newTodo))
+                */
+                this.axios.delete('http://localhost:8080/api/todo' + id)
+                    .then(response => this.todos.splice(this.$data.todos.indexOf(this.$data.newTodo), 1));
+
+                /*window.location.reload();*/
             },
 
             saveAll: function () {
@@ -53,6 +67,7 @@
                         name: this.$data.newTodo
                     })
                 })
+                window.location.reload();
             },
 
             getAll: function () {
