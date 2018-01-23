@@ -1,4 +1,4 @@
-<template xmlns:v-model="http://www.w3.org/1999/xhtml">
+<template>
     <div>
         <header><div id="header"><p>
         Uni-Planer</p>
@@ -14,12 +14,6 @@
                     <td><strong>ECT</strong></td>
                     <td></td>
                 </tr>
-                <!--<tr>
-                    <td>Summe</td>
-                    <td>getGradesAverage()</td>
-                    <td>getEcts()</td>
-                    <td></td>
-                </tr> -->
                 </thead>
 
                 <tbody>
@@ -36,12 +30,7 @@
             </div>
         </div>
     <div id="buttons">
-        <!--<button id="getECTS" v-on:click="getEcts">ECTS berechnen</button> Summe der ECTS berechnen-->
-        <!--<button id="getNotes" v-on:click="getGradesAverage">Notendurchschnitt berechnen</button>Durchschnitt der bestandenen Noten berechnen -->
         <button id="save" v-on:click="saveAll">Speichern</button>
-    </div>
-    <div>
-
     </div>
     </div>
 </template>
@@ -55,12 +44,12 @@
         }},
         methods:{
             addRow: function(){
-                this.noten.push({modul: "",note: "", ect: ""} );
+                this.noten.push({modul: "",note: "", ect: "",} );
             },
             removeRow: function(){
                 this.$data.noten.splice(this.$data.noten.indexOf(this.$data.note),1);
                 let uri = 'http://localhost:8080/api/noten'
-                this.axios.delete(uri,{"_id":this.$data.note})
+                this.axios.delete(uri, this.$data.note._id)
             },
             saveAll: function () {
                 let uri = 'http://localhost:8080/api/noten';
