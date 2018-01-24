@@ -202,18 +202,15 @@ apiRoutes.post('/todo', function (req, res) {
         });
 
 });
-/*
-apiRoutes.del('/todo',function (req,res, next) {
 
-
-            }
-
-        });
-
-    });
+apiRoutes.delete('/todo/',(req, res)=> {
+    ToDO.findByIdAndRemove(req.query._id, function (err, newTodo) {
+        console.log(req);
+        if (err)
+            throw err;
+        res.json({ success: true, message: "Deleted" });})
 
 });
-*/
 
 apiRoutes.put('/todo', function (req, res) {
     ToDO.updateOne({},)
