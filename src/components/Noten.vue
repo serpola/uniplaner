@@ -2,7 +2,7 @@
     <div>
         <header><div id="header"><p>
         Uni-Planer</p>
-        <a id="lgout" href="index.html">Abmelden</a></div></header>
+        </div></header>
 
 
         <div id="app">

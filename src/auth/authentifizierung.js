@@ -15,9 +15,7 @@ export default {
             localStorage.setItem('token', response.data.id_token)
             console.log(response);
             this.user.authenticated = true
-            /*if(redirect){
-                 router.go(redirect)
-             }*/
+
         })
 
     },
@@ -33,7 +31,7 @@ export default {
 
         })
     },
-//.then((response)=>{this.$router.push({name:'login'})})
+
     logout(){
         localStorage.removeItem('token')
         this.user.authenticated=false
@@ -45,12 +43,6 @@ export default {
             this.user.authenticated=true
         }else{
             this.user.authenticated=false
-        }
-    },
-
-    getAuthHeader(){
-        return{
-            'Authorization':'Bearer'+localStorage.getItem('id_token')
         }
     }
 }

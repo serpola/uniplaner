@@ -1,18 +1,18 @@
 <template>
 
-
-    <div><div>
+    <div>
+        <div>
         <header>
             <div>
                 <p>Uni-Planer</p>
             </div>
         </header>
         </div>
-<div>
+        <div>
     <vue-event-calendar >
         <template scope="props">
                 <div>
-           <div v-bind:id="event._id" v-for="event in events" class="event-item">
+           <div v-bind:key="event._id" v-for="event in events" class="event-item">
 
                 {{event.title}} {{event.date}} {{event.beschr}} <button v-on:click="removeEvent(event._id)">x</button>
 
@@ -20,9 +20,7 @@
             </div>
         </template>
 
-
     </vue-event-calendar>
-
 
 </div>
         <br>
@@ -60,26 +58,17 @@
                 ).then((response)=> {
                     this.loading =true;
                     this.$data.events.push(this.$data.newEvent);
-                    window.location.reload();
-                    console.log(this.$data.events);
+
+
                 })
             },
-            loadEvents: function () {
-                this.loading = true;
-                let uri = 'http://localhost:8080/api/events'
-                this.axios.get(uri)
-                    .then(resp=>{
-                        this.$data.events = resp.data
-                        console.log(this.$data.events);
-                    })
-            },
+
             removeEvent: function (event_id) {
                     let uri = 'http://localhost:8080/api/events';
                     this.axios.delete(uri, { params: {_id: event_id}})
                         .then((response)=>{
-                                this.$data.events.splice(this.$data.events.indexOf(event_id),1);
-                                window.location.reload();
-                                console.log(this.$data.events);
+
+                                this.$data.events.splice(this.$data.events.indexOf(event),1);
                             }
                         )
 

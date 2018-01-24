@@ -4,7 +4,7 @@
 
     <header>
         <div><p>Uni-Planer</p>
-            <a id="lgout" href="../index.html">Abmelden</a></div>
+        </div>
     </header>
 
     <p id="beschreibung">Hier findest du den Mensaplan deiner Hochschule. Scroll einfach durch und such sie.</p>
