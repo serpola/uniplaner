@@ -73,13 +73,13 @@
                     })
             },
             removeEvent: function (event_id) {
-                let uri = 'http://localhost:8080/api/events/'
-                this.axios.delete(uri, { params: {_id: event_id}})
-                    .then((response)=>{
-                        this.events.splice(this.$data.events.indexOf(this.$data.event),1);
-                        console.log(this.$data.events);
-
-                    })
+                    let uri = 'http://localhost:8080/api/events';
+                    this.axios.delete(uri, { params: {_id: event_id}})
+                        .then((response)=>{
+                                console.log(this.$data.events);
+                            }
+                        )
+                    this.$data.events.splice(this.$data.events.indexOf(event_id),1);
             }
 
         },

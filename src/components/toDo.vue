@@ -18,9 +18,9 @@
         </div>
 
         <ul id="myUL">
-            <li v-model="t.aufgabe" v-bind:id="t.aufgabe" v-for="t in todos">
+            <li v-bind:id="t._id" v-model="t.aufgabe" v-for="t in todos">
                 {{ t.aufgabe }}
-                <button v-on:click="removeElement">remove</button>
+                <button v-on:click="removeElement(t._id)">remove</button>
             </li>
 
         </ul>
@@ -40,11 +40,14 @@
         methods: {
 
             //Löscht bei Benutzen des Remove Buttons Einträge im Front- und Backend
-            removeElement: function () {
-                //this.$data.todos.splice(this.$data.todos.indexOf(this.$data.newTodo),1);
-                let uri = 'http://localhost:8080/api/todo'
-                this.axios.delete(uri, this.$data.newTodo._id)
-
+            removeElement: function (newTodo_id) {
+                let uri = 'http://localhost:8080/api/todo';
+                this.axios.delete(uri, { params: {_id: newTodo_id}})
+                    .then((response)=>{
+                            console.log(this.$data.todos);
+                        }
+                    )
+                this.$data.todos.splice(this.$data.todos.indexOf(newTodo_id),1);
             },
 
             //speichert alle Einträge in der DB
