@@ -18,7 +18,7 @@
         </div>
 
         <ul id="myUL">
-            <li v-bind:id="newTodo.aufgabe"v-for="t in todos">
+            <li v-model="t.aufgabe" v-bind:id="t.aufgabe" v-for="t in todos">
                 {{ t.aufgabe }}
                 <button v-on:click="removeElement(newTodo, newTodo._id)">remove</button>
             </li>
@@ -39,20 +39,9 @@
     },
         methods: {
 
-            /*fetchData: function(){
-                let uri
-                this.axios.get("http://localhost:8080/api/todo").subscribe(
-                  (response) => {
-                      this.todos = response.json();
-                  }
-              )
-            },*/
+            removeElement: function (todos, id) {
 
-            removeElement: function(newTodo, id) {
-
-                this.todos.splice(this.$data.newTodo.indexOf(this.$data.newTodo), 0);
-
-                /*window.location.reload();*/
+            
             },
 
             saveAll: function () {
@@ -68,24 +57,17 @@
             },
 
             getAll: function () {
-                window.location.reload();
                 let uri = 'http://localhost:8080/api/todo';
-                this.axios.get(uri).then((response)=>{
+                this.axios.get(uri)
+                    .then((response)=>{
                     this.$data.todos = response.data
-                }).catch(function (error) {
-                    console.log(error);
-                });
+                })
+                    .catch(err => console.log(err))
             },
         },
 
         mounted: function () {
-            let uri = 'http://localhost:8080/api/todo';
-            this.axios.get(uri).then((response)=>{
-                this.$data.todos = response.data
-            }).catch(function (error) {
-                console.log(error);
-            });
-
+            this.getAll();
         }
 
     }
