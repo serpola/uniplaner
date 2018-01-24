@@ -47,10 +47,10 @@
                 this.noten.push({modul: "",note: "", ect: "",});
             },
             removeRow: function(note_id){
-                this.$data.noten.splice(this.$data.noten.indexOf(this.$data.note),1);
                 let uri = 'http://localhost:8080/api/noten'
                 this.axios.delete(uri, { params: {_id: note_id}})
                     .then((response)=>{
+                        this.$data.noten.splice(this.$data.noten.indexOf(this.$data.note),1);
                         console.log(this.$data.noten);
                     }
 
