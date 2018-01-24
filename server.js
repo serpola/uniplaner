@@ -178,7 +178,14 @@ apiRoutes.post('/noten', function (req, res) {
             res.status(400).send('Konnte nicht auf der DB gespeichert werden');
         });
 });
-
+apiRoutes.delete('/noten',(req,res)=>{
+    Noten.findByIdAndRemove(req.query._id, function(err, note){
+        console.log(req);
+        if(err)
+            throw err;
+        res.json({ success: true, message: "Deleted"});
+    })
+});
 //CRUD to-Do
 apiRoutes.get('/todo', function (req, res) {
     ToDO.find({}, function (err, todo) {
