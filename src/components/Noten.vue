@@ -17,11 +17,11 @@
                 </thead>
 
                 <tbody>
-                <tr v-bind:id="note.modul" v-for="note in noten">
+                <tr v-bind:id="note._id" v-for="note in noten">
                     <td><input type="text" v-model="note.modul"></td>
                     <td><input type="text" v-model="note.note"></td>
                     <td><input type="text" v-model="note.ect"></td>
-                    <td><a @click="removeRow()">Remove</a></td>
+                    <td><a @click="removeRow(note._id)">Remove</a></td>
                 </tr>
                 </tbody>
             </table>
@@ -44,12 +44,17 @@
         }},
         methods:{
             addRow: function(){
-                this.noten.push({modul: "",note: "", ect: "",} );
+                this.noten.push({modul: "",note: "", ect: "",});
             },
-            removeRow: function(){
+            removeRow: function(note_id){
                 this.$data.noten.splice(this.$data.noten.indexOf(this.$data.note),1);
                 let uri = 'http://localhost:8080/api/noten'
-                this.axios.delete(uri, this.$data.note._id)
+                this.axios.delete(uri, { params: {_id: note_id}})
+                    .then((response)=>{
+                        console.log(this.$data.noten);
+                    }
+
+                )
             },
             saveAll: function () {
                 let uri = 'http://localhost:8080/api/noten';
