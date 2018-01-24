@@ -18,7 +18,7 @@
         </div>
 
         <ul id="myUL">
-            <li v-for="t in todos">
+            <li v-bind:id="newTodo.aufgabe"v-for="t in todos">
                 {{ t.aufgabe }}
                 <button v-on:click="removeElement(newTodo, newTodo._id)">remove</button>
             </li>
@@ -48,12 +48,9 @@
               )
             },*/
 
-            removeElement: function(todos, id) {
-                /*this.$data.todos.splice(this.$data.todos.indexOf(this.$data.newTodo),1);
-                this.axios.delete(uri, indexOf(this.$data.newTodo))
-                */
-                this.axios.delete('http://localhost:8080/api/todo' + id)
-                    .then(response => this.todos.splice(this.$data.todos.indexOf(this.$data.newTodo), 1));
+            removeElement: function(newTodo, id) {
+
+                this.todos.splice(this.$data.newTodo.indexOf(this.$data.newTodo), 0);
 
                 /*window.location.reload();*/
             },
@@ -66,11 +63,12 @@
                     this.$data.todos.push({
                         name: this.$data.newTodo
                     })
-                })
+                });
                 window.location.reload();
             },
 
             getAll: function () {
+                window.location.reload();
                 let uri = 'http://localhost:8080/api/todo';
                 this.axios.get(uri).then((response)=>{
                     this.$data.todos = response.data
