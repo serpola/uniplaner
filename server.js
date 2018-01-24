@@ -15,7 +15,7 @@ var User   = require('./app/models/user'); // getten der mongose datei
 var Noten  = require('./app/models/noten');
 var ToDO   = require('./app/models/todo');
 var Events = require('./app/models/events');
-
+var ObjectId = require('mongodb').ObjectID;
 
 // =================================================================
 // configuration ===================================================
@@ -101,7 +101,7 @@ apiRoutes.post('/authenticate', function(req, res) {
     });
 });
 
-apiRoutes.use(jwt({ secret: config.secret}).unless({path: ['/authorization']}));
+//apiRoutes.use(jwt({ secret: config.secret}).unless({path: ['/authorization']}));
 
 // ---------------------------------------------------------
 // authenticated routes
@@ -146,10 +146,15 @@ apiRoutes.post('/events',(req, res)=>{
             res.status(400).send('Event konnte nicht gespeichert werden');
         })
 })
-/*
-apiRoutes.delete('/events',(req, res)=>{
-    Events.findByIdAndRemove(req.params.EventsId)
-})*/
+
+apiRoutes.delete('/events/',(req, res)=> {
+  Events.findByIdAndRemove(req.query._id, function (err, event) {
+      console.log(req);
+      if (err)
+          throw err;
+       res.json({ success: true, message: "Deleted" });})
+
+});
 
 //CRUD Noten
 apiRoutes.get('/noten', function (req, res){
@@ -190,7 +195,18 @@ apiRoutes.post('/todo', function (req, res) {
         });
 
 });
+/*
+apiRoutes.del('/todo',function (req,res, next) {
 
+
+            }
+
+        });
+
+    });
+
+});
+*/
 
 apiRoutes.put('/todo', function (req, res) {
     ToDO.updateOne({},)

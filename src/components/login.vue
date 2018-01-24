@@ -8,9 +8,6 @@
             <label for="inputPassword" class="sr-only">Password</label>
             <input type="password" id="inputPassword" class="form-control" placeholder="Passwort" required autofocus v-model="user.password">
             <div class="checkbox">
-                <label>
-                    <input type="checkbox" value="remember-me"> Angemeldet bleiben
-                </label>
                 <router-link to="Register">Registrieren Sie sich hier!</router-link>
 
             </div>
