@@ -51,6 +51,7 @@
                 this.axios.delete(uri, { params: {_id: note_id}})
                     .then((response)=>{
                         this.$data.noten.splice(this.$data.noten.indexOf(this.$data.note),1);
+                        window.location.reload();
                         console.log(this.$data.noten);
                     }
 
