@@ -44,10 +44,11 @@
                 let uri = 'http://localhost:8080/api/todo';
                 this.axios.delete(uri, { params: {_id: newTodo_id}})
                     .then((response)=>{
-                            console.log(this.$data.todos);
+                        this.$data.todos.splice(this.$data.newTodo.indexOf(newTodo_id),1);
+                        window.location.reload();
+                        console.log(this.$data.todos);
                         }
-                    )
-                this.$data.todos.splice(this.$data.todos.indexOf(newTodo_id),1);
+                    ).catch(err => console.log(err))
             },
 
             //speichert alle Einträge in der DB
@@ -58,7 +59,7 @@
                 }).then((response) => {
                     this.$data.todos.push({
                         name: this.$data.newTodo
-                    })
+                    }).catch(err => console.log(err))
                 });
                 window.location.reload();
             },

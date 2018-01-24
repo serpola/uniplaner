@@ -60,6 +60,7 @@
                 ).then((response)=> {
                     this.loading =true;
                     this.$data.events.push(this.$data.newEvent);
+                    window.location.reload();
                     console.log(this.$data.events);
                 })
             },
@@ -76,10 +77,12 @@
                     let uri = 'http://localhost:8080/api/events';
                     this.axios.delete(uri, { params: {_id: event_id}})
                         .then((response)=>{
+                                this.$data.events.splice(this.$data.events.indexOf(event_id),1);
+                                window.location.reload();
                                 console.log(this.$data.events);
                             }
                         )
-                    this.$data.events.splice(this.$data.events.indexOf(event_id),1);
+
             }
 
         },
